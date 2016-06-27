@@ -11,16 +11,16 @@
         %strong
           Inscripción de Eventos
 .wrapper.wrapper-content.animated.fadeInRight
-  .row.form-horizontal#form_consulta_eventos
-    .col-md-10
-      .form-group
-        = label_tag :evento_id, class: 'col-sm-4 control-label' do
-          Evento:
-        .col-sm-8
-          = select_tag :evento_id, options_for_select(Evento.all.collect { |p| [p.nombre, p.id]}), {include_blank: 'Seleccione', class: 'form-control', id: 'evento_select_tag'}
-  %br/
-  %br/
-  .row
-    .col-sm-2.col-sm-offset-5
-      %a.btn.btn-primary.btn-block#btn_procesar
-        Procesar
+  .row.form-horizontal
+    = form_tag({:controller => 'inscripcion_eventos', :action => 'index'}, :method => 'get') do
+      .col-md-10
+        .form-group
+          = label_tag :evento_id, class: 'col-sm-4 control-label' do
+            Evento:
+          .col-sm-8
+            = select_tag :evento_id, options_for_select(@eventos.collect { |p| [p.nombre, p.id]}), {include_blank: 'Seleccione', class: 'form-control', id: 'evento_id'}
+      %br/
+      %br/
+      .row
+        .col-sm-2.col-sm-offset-5
+          = submit_tag 'Procesar', class: 'btn btn-primary btn-block'

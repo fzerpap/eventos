@@ -5,14 +5,15 @@ class InscripcionEventosController < ApplicationController
   respond_to :json, :html
 
   def index
-    @evento = Evento.find_by(nombre: "Escuela de Influencia y Transformación")
+    @evento = Evento.find(params[:evento_id])
     @estadisticas = InscripcionEvento.get_estadisticas(@evento)
     @inscripcion_eventos = @evento.inscripcion_eventos.where(aceptado: nil).order(:fecha)
     respond_with(@inscripcion_eventos)
   end
 
-  def index_consulta_eventos
 
+  def index_consulta_eventos
+   @eventos = Evento.all
   end
 
 
@@ -37,9 +38,7 @@ class InscripcionEventosController < ApplicationController
 
   def ver_inscripciones
     @evento = Evento.find_by(nombre: "Escuela de Influencia y Transformación")
-
     @estadisticas = InscripcionEvento.get_estadisticas(@evento)
-    #@inscripcion_eventos = @evento.inscripcion_eventos.includes(contacto: [:estado, :profesion, :ministerio] ).order(:fecha)
     @inscripcion_eventos = @evento.inscripcion_eventos.order(:fecha)
     respond_with(@inscripcion_eventos)
   end

@@ -41,18 +41,6 @@ jQuery(document).ready ($) ->
         $('#msg_procesando').hide()
         alert("No existe registros para esta consulta o existen campos no seleccionados")
 
-  $('#btn_procesar').click ->
-    $.ajax
-      type: 'POST'
-      url: '/inscripcion_eventos'
-      dataType: 'JSON'
-      data:
-        criterio: $('input:radio[name=criterio]:checked').val()
-        evento_id: $('#evento_select').val()
-        pais_id: $('#pais_select').val()
-      success: (data) ->
-        $('#msg_procesando').hide()
-
 angular
 .module('inscripcionEventos', [])
 .controller( "InscripcionEventosController", @InscripcionEventosController = ($scope,$http) ->

@@ -1,0 +1,45 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Mensajes Configurados
+      %i.fa.fa-envelope-o
+    %ol.breadcrumb
+      = render_breadcrumbs
+.wrapper.wrapper-content.animated.fadeInRight
+- if @mensajes.empty?
+  .row
+    .col-md-12
+      %ul.text-muted.leyenda
+        %li.text-justify
+          Puede registrar un Mensaje haciendo click en
+          %span.amarillo
+            Nuevo Mensaje
+  .ibox-content.text-center
+    %h3.font-bold No hay Mensajes Registrados
+    =link_to  'Nuevo Mensaje',  new_evento_mensaje_path ,  class: 'btn btn-primary pull-center'
+    %br
+    %br
+-else
+  = render 'table_mensajes', object: @mensajes
+
+%div#form_mensaje_index{style:'display:none;'}
+  = render 'form'
+
+.row
+  .col-sm-12
+    .ibox.float-e-margins
+      .ibox-content
+        .row
+          .col-sm-3
+            - if Evento.tipo_plan_evento(@evento_id.id) == 'Intermedio' || Evento.tipo_plan_evento(@evento_id.id) == 'Full'
+              = link_to  evento_equipo_gestor_index_path(evento_id: @evento_id.id), class: 'btn btn-success btn-responsive btn-block', data: {disable_with: 'Regresar Equipo Gestor'} do
+                %i.fa.fa-arrow-left
+                Regresar
+            -else
+              = link_to  evento_zonas_path(evento_id: @evento_id.id), class: 'btn btn-success btn-responsive btn-block', data: {disable_with: 'Regresar Mensaje'} do
+                %i.fa.fa-arrow-left
+                Regresar
+          .col-sm-3.col-sm-offset-5
+            = link_to eventos_path, class: 'btn btn-primary btn-responsive btn-block', data: {disable_with: 'Finalizar'} do
+              %i.fa.fa-arrow-right
+              Finalizar

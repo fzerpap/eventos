@@ -1,0 +1,86 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-10
+    %h2
+      %i.fa.fa-home
+      -#= current_user.unidad_ordenacion.reserva_forestal.nombre rescue 'Reserva'
+      -#\- Cuencas
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Contenido
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+      .ibox.float-e-margins
+        .ibox-title
+          %h3
+            Edición de Contenido
+        .ibox-content
+          .row
+            .col-sm-5
+              %table.table.table-striped.table-bordered.table-condensed
+                %tbody
+                  %tr
+                    %td.text-right
+                      %strong Institución:
+                    %td
+                      = @contenido.empresa.denominacion
+                  %tr
+                    %td.text-right
+                      %strong Titulo:
+                    %td
+                      = @contenido.titulo
+                  %tr
+                    %td.text-right
+                      %strong Autor:
+                    %td
+                      = @contenido.autor
+                  %tr
+                    %td.text-right
+                      %strong Descripcion:
+                    %td
+                      = @contenido.descripcion
+                  %tr
+                    %td.text-right
+                      %strong Palabras Claves:
+                    %td
+                      = @contenido.palabras_claves
+                  %tr
+                    %td.text-right
+                      %strong Tipo de Contenido:
+                    %td
+                      = @contenido.tipo_contenido.nombre
+                  %tr
+                    %td.text-right
+                      %strong Tipo de Archivo:
+                    %td
+                      = @contenido.tipo_archivo
+                  %tr
+                    %td.text-right
+                      %strong Url del Archivo:
+                    %td
+                      = @contenido.nombre_archivo
+          -#.row
+          -#  .col-lg-6
+          -#    .ibox.float-e-margins.white-bg
+          -#      .ibox-title
+          -#        %h5 Contenido del Archivo
+          -#        .ibox-tools
+          -#          %a.collapse-link
+          -#            %i.fa.fa-chevron-up
+          -#          %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => '#'}
+          -#      .ibox-content
+          -#        %figure.text-center
+          -#          %iframe{:allowfullscreen => '', :frameborder => '0', :height => '450', :src => @contenido.nombre_archivo_url, :width => '500'}
+          .row
+            .col-sm-3
+              = link_to contenidos_path, class: 'btn btn-success' do
+                %i.fa.fa-arrow-left
+                Regresar
+            .col-sm-3
+              = link_to edit_contenido_path(@contenido), class: 'btn btn-primary' do
+                Editar
+                %i.fa.fa-edit
+

@@ -1,0 +1,30 @@
+-#= provide(:title, "#{current_user.unidad_ordenacion.reserva_forestal.nombre rescue 'Simapro'} - Cuencas")
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      %i.fa.fa-home
+      Gestión de Contenido
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Gestión de Contenido
+.wrapper.wrapper-content.animated.fadeInRight
+  -if @contenidos.blank?
+    - if can? :create, Contenido
+      .row
+        .col-md-12
+          %ul.text-muted.leyenda
+            %li.text-justify
+              Puede registrar un Contenido haciendo click en
+              %span.amarillo
+                Nuevo Contenido
+    .ibox-content.text-center
+      %h3.font-bold  No Posee Contenidos Registrados
+      - if can? :create, Evento
+        =link_to  'Nuevo Contenido',new_contenido_path ,  class: 'btn btn-primary pull-center'
+        %br/
+        %br/
+  -else
+    = render 'table_contenidos', object: @contenidos

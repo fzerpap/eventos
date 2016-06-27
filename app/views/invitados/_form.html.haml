@@ -1,0 +1,40 @@
+= form_for  @invitado, html: { class: 'form-horizontal', role: 'form' } do |f|
+  .row
+    .col-md-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            = render 'shared/error_messages', object: f.object, model: 'Invitado'
+            .row.col-sm-12.col-sm-offset-1
+              .form-group
+                = f.label :fecha_invitacion, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  fecha_invitacion:
+                .col-sm-6
+                  = f.date_select :fecha_invitacion,  class: 'form-control'
+              .form-group
+                = f.label :fecha_confirmacion, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  fecha_confirmacion:
+                .col-sm-6
+                  = f.date_select :fecha_confirmacion,  class: 'form-control'
+            .form-group
+              = f.label :tipo_confirmacion, class: 'col-sm-2 control-label' do
+                %span.fa.fa-asterisk.red
+                tipo_confirmacion:
+              .col-sm-6
+                = f.number_field :tipo_confirmacion,  class: 'form-control' 
+
+  .row
+    .col-sm-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            .col-sm-3
+              = link_to invitados_path, class: 'btn btn-success' do
+                %i.fa.fa-arrow-left
+                Regresar
+            .col-sm-3.col-sm-offset-3
+              = f.button class: 'btn btn-primary btn-responsive btn-block', data: {disable_with: 'Guardar'} do
+                Guardar
+                %i.fa.fa-floppy-o

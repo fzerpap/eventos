@@ -1,0 +1,129 @@
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      = form_for(@empresa,html:{ id: 'form_empresa'}) do |f|
+        .row
+          .col-md-12
+            .ibox.float-e-margins.white-bg
+              .ibox-title
+                %h3
+                  Datos
+              .ibox-content
+                .row
+                  = render 'shared/error_messages', object: f.object, model: 'Institución'
+                  .row.col-sm-12.col-sm-offset-2
+                    .form-group.col-sm-6
+                      = f.label :denominacion , class: 'col-sm-4 control-label' do
+                        Denominación:
+                        %span.fa.fa-asterisk.red
+                      .col-sm-8
+                        = f.text_field :denominacion,class: 'form-control'
+                  .row.col-sm-12.col-sm-offset-2
+                    .form-group.col-sm-6
+                      = f.label :abreviado , class: 'col-sm-4 control-label' do
+                        Nombre Abreviado:
+                        %span.fa.fa-asterisk.red
+                      .col-sm-8
+                        = f.text_field :abreviado, class: 'form-control'
+                  .row.col-sm-12.col-sm-offset-2
+                    .form-group.col-sm-6
+                      = f.label :rif , class: 'col-sm-4 control-label' do
+                        RIF:
+                        %span.fa.fa-asterisk.red
+                      .col-sm-8
+                        = f.text_field :rif,class: 'form-control'
+                  .row.col-sm-12.col-sm-offset-2
+                    .form-group.col-sm-6
+                      = f.label :direccion_fiscal , class: 'col-sm-4 control-label' do
+                        Dirección:
+                        %span.fa.fa-asterisk.red
+                      .col-sm-8
+                        = f.text_field :direccion_fiscal,class: 'form-control'
+                  .row.col-sm-12.col-sm-offset-2
+                    .form-group.col-sm-6
+                      = f.label :telefono , class: 'col-sm-4 control-label' do
+                        Teléfono:
+                        %span.fa.fa-asterisk.red
+                      .col-sm-8
+                        = f.text_field :telefono,class: 'form-control'
+                  .row.col-sm-12.col-sm-offset-2
+                    .form-group.col-sm-6
+                      = label_tag :pais_id, class: 'col-sm-4 control-label' do
+                        Pais:
+                        %span.fa.fa-asterisk.red
+                      .col-sm-8
+                        -if f.object.estado_id
+                          - p = Estado.find(f.object.estado_id).pais_id
+                          = select_tag :pais_id, options_from_collection_for_select(Pais.all.order(:nombre), 'id', 'nombre', p), class:'form-control col-sm-1'
+                        -else
+                          = select_tag :pais_id, options_from_collection_for_select(Pais.all.order(:nombre), 'id', 'nombre'), include_blank: true, class:'form-control col-sm-1'
+                  .row.col-sm-12.col-sm-offset-2
+                    -if f.object.estado_id
+                      .form-group.col-sm-6
+                        = f.label :estado_id, class: 'col-sm-4 control-label' do
+                          Estado:
+                          %span.fa.fa-asterisk.red
+                        .col-sm-8
+                          = f.grouped_collection_select :estado_id, Pais.all.order(:nombre), :estados , :nombre, :id, :nombre, {}, { class: 'form-control' }
+                    -else
+                      .form-group.col-sm-6#estado_id
+                        = f.label :estado_id, class: 'col-sm-4 control-label' do
+                          Estado:
+                          %span.fa.fa-asterisk.red
+                        .col-sm-8
+                          = f.grouped_collection_select :estado_id, Pais.all.order(:nombre), :estados , :nombre, :id, :nombre, {}, { class: 'form-control' }
+                  .row.col-sm-12.col-sm-offset-2
+                    .form-group.col-sm-6
+                      = f.label :nombre_rl, class: 'col-sm-4 control-label' do
+                        Representante Legal:
+                        %span.fa.fa-asterisk.red
+                      .col-sm-8
+                        = f.text_field :nombre_rl,class: 'form-control'
+                  .row.col-sm-12.col-sm-offset-2
+                    .form-group.col-sm-6
+                      = f.label :email_rl, class: 'col-sm-4 control-label' do
+                        Email del Representante Legal:
+                        %span.fa.fa-asterisk.red
+                      .col-sm-8
+                        = f.email_field :email_rl,class: 'form-control'
+                  .row.col-sm-12.col-sm-offset-2
+                    .form-group.col-sm-6
+                      = f.label :email_rl, class: 'col-sm-4 control-label' do
+                        Confirmar Correo Electrónico:
+                        %span.fa.fa-asterisk.red
+                      .col-sm-8
+                        = f.email_field :email_rl_confirmation, class: 'form-control', required: 'required'
+                  .row.col-sm-12.col-sm-offset-2
+                    .form-group.col-sm-6
+                      = f.label :telefono_rl, class: 'col-sm-4 control-label' do
+                        Teléfono del Representante Legal:
+                        %span.fa.fa-asterisk.red
+                      .col-sm-8
+                        = f.text_field :telefono_rl,class: 'form-control'
+                  .row.col-sm-12.col-sm-offset-2
+                    .form-group.col-sm-6
+                      = f.label :es_iglesia, class: 'col-sm-4 control-label' do
+                        Es un iglesia ?
+                        %span.fa.fa-asterisk.red
+                      .col-sm-8
+                        .col-sm-2
+                          = label_tag 'Si'
+                        .col-sm-2.text-right
+                          = f.radio_button :es_iglesia, true
+                        .col-sm-2
+                          = label_tag 'No'
+                        .col-sm-2
+                          = f.radio_button :es_iglesia, false, checked: true
+          .row
+            .col-sm-12
+              .ibox.float-e-margins
+                .ibox-content
+                  .row
+                    .col-sm-2
+                      = link_to empresas_path, class: 'btn btn-success' do
+                        %i.fa.fa-arrow-left
+                        Regresar
+                    .col-sm-3.col-sm-offset-7
+                      = f.button class: 'btn btn-primary btn-responsive btn-block', data: {disable_with: 'Guardar'} do
+                        Guardar
+                        %i.fa.fa-floppy-o

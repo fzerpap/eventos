@@ -1,0 +1,32 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Nuevo Plan
+      %i.fa.fa-folder-open-o
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Planes Registrados
+.wrapper.wrapper-content.animated.fadeInRight#pagina_index_tiendas
+  - if @tipo_planes.empty?
+    - if can? :create, TipoPlan
+      .row
+        .col-md-12
+          %ul.text-muted.leyenda
+            %li.text-justify
+              Puede registrar un plan haciendo click en
+              %span.amarillo
+                Nuevo Tipo plan
+    .ibox-content.text-center
+      %h3.font-bold No hay Planes Registrados
+      - if can? :create, TipoPlan
+        =link_to  'Nuevo Tipo plan',new_tipo_plan_path ,  class: 'btn btn-primary pull-center'
+        %br/
+        %br/
+  -else
+    = render 'table_tipo_planes', object: @tipo_planes
+
+%div#form_plan{style:'display:none;'}
+  = render 'form'

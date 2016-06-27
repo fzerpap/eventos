@@ -1,0 +1,48 @@
+.row
+  .col-md-12
+    .ibox.float-e-margins
+      .ibox-content
+        .row
+          .col-lg-12
+            .table-responsive
+              %table.table.table-striped.table-bordered.table-hover.display#table_resultados
+                %thead
+                  %th.align-center
+                    Nombres
+                    %i.fa.fa-sort
+                  %th.align-center
+                    Apellidos
+                    %i.fa.fa-sort
+                  %th.align-center
+                    Documento de Identidad
+                    %i.fa.fa-sort
+                  %th.align-center
+                    Profesión
+                    %i.fa.fa-sort
+                  %th.align-center
+                    Email
+                    %i.fa.fa-sort
+                  %th.align-center
+                    Teléfono
+                    %i.fa.fa-sort
+                  %th.align-center
+                    Acciones
+                    %i.fa.fa-sort
+                %tbody#t_resultados
+                  - @grupo.contacto_grupos.each do |gc|
+                    %tr
+                      %td
+                        = gc.contacto.nombres
+                      %td
+                        = gc.contacto.apellidos
+                      %td
+                        = gc.contacto.doc_identidad
+                      %td
+                        = gc.contacto.profesion.nombre
+                      %td
+                        = gc.contacto.email
+                      %td
+                        = gc.contacto.telefono
+                      %td
+                        = link_to delete_contactos_path(id: gc.id), data: { confirm: '¿Está seguro de eliminar el contacto?' }, method: :delete, remote: true, 'data-toggle'=> 'tooltip', 'data-placement' => 'left',  'title' => 'Eliminar' do
+                          %i.fa.fa-trash.fa-2x

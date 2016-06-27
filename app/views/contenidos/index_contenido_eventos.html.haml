@@ -1,0 +1,37 @@
+-#= provide(:title, "#{current_user.unidad_ordenacion.reserva_forestal.nombre rescue 'Simapro'} - Cuencas")
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      %i.fa.fa-home
+      Reprodución de Contenido
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Reproducir Contenido
+.wrapper.wrapper-content.animated.fadeInRight
+  .row.form-horizontal#form_xconsulta
+    .col-md-10
+      .form-group
+        = label_tag :evento_id, class: 'col-sm-4 control-label' do
+          Evento:
+        .col-sm-8
+          = select_tag :evento_id, options_for_select(Evento.all.collect { |p| [p.nombre, p.id]}), {include_blank: 'Seleccione', class: 'form-control', id: 'evento_select_tag'}
+  %br/
+  %br/
+  .row
+    .col-sm-2.col-sm-offset-5
+      %a.btn.btn-primary.btn-block#btn_procesar
+        Procesar
+  %br
+  %br
+  %div#div_procesando
+  .row#msg_procesando{style:'display:none;'}
+    .col-sm-2.col-sm-offset-5.text-center
+      %h2
+        Procesando
+        %br
+        %i.fa.fa-refresh.fa-spin.fa-2x
+  %div#div_table_resultados{style:'display:none;'}
+    = render 'table_contenido_json'

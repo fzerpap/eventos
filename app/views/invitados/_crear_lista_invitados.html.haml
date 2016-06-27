@@ -1,0 +1,97 @@
+.row
+  .form-horizontal#form_crear_invitados
+    .col-md-4
+      .form-group
+        = label_tag :evento_id, class: 'col-sm-4 control-label' do
+          Eventos:
+        .col-sm-8
+          = select_tag :evento_id, options_from_collection_for_select(current_user.empresa.eventos, :id, :nombre), {include_blank: 'Seleccione Evento', class: 'form-control', id: 'evento_select' }
+    .col-md-4
+      .form-group
+        = label_tag :contacto_id, class: 'col-sm-4 control-label' do
+          Grupos de Contactos:
+        .col-sm-8
+          .grupo_contactos
+            %table.table.table-striped#table_grupo_contactos
+              %thead
+                %th= check_box_tag :all, true , false, id: 'checkall_ge'
+              %tbody#tbody_grupos_checks
+                = collection_check_boxes :grupo_contactos, :grupo_contactos, current_user.empresa.grupos.all, :id, :nombre do |g|
+                  %tr
+                    %td
+                      = g.check_box
+                    %td
+                      = g.object.nombre
+    .col-md-4
+      .form-group
+        = label_tag :estado_civil, class: 'col-sm-4 control-label' do
+          Estado civil:
+        .col-sm-8
+          .estado_civil
+            %table.table.table-striped#table_estado_civil
+              %thead
+                %th= check_box_tag :all, true , false, id: 'checkall_estado'
+              %tbody#tbody_estado_civil_checks
+                -  Contacto.estado_civiles.each do |item, es|
+                  %tr
+                    %td
+                      = check_box_tag 'estado_civil[]', es
+                    %td
+                      = label_tag :estado_civil, item.capitalize
+    .col-md-4
+      .form-group
+        = label_tag :sexo, class: 'col-sm-4 control-label' do
+          Sexo:
+        .col-sm-8
+          .sexo
+            %table.table.table-striped#table_sexo
+              %thead
+                %th= check_box_tag :all, true , false, id: 'checkall_sexo'
+              %tbody#tbody_sexo_checks
+                -  Contacto.sexos.each do |itemc, ec|
+                  %tr
+                    %td
+                      = check_box_tag 'sexo[]', ec
+                    %td
+                      = label_tag :sexo, itemc.capitalize
+    .col-md-6
+      .form-group
+        = label_tag :edad, class: 'col-sm-4 control-label' do
+          Edad:
+        .col-sm-8
+          .col-sm-2
+            = label_tag :desde, class: 'control-label' do
+              Desde:
+          .col-sm-3
+            = number_field_tag :desde,'', min: 1, class:'form-control'
+          .col-sm-2
+            = label_tag :hasta, class: 'control-label' do
+              Hasta:
+          .col-sm-3
+            = number_field_tag :hasta,'', min: 1,  class:'form-control'
+          .col-sm-2
+            = label_tag :anos, class: 'control-label' do
+              Años
+
+        -#.col-md-4
+        -#  .form-group
+        -#    = label_tag :profesion, class: 'col-sm-4 control-label' do
+        -#      Profesión:
+        -#    .col-sm-8
+        -#      .profesiones
+        -#        %table.table.table-striped#table_profesiones
+        -#          %thead
+        -#            %th= check_box_tag :all, true , false, id: 'checkall_p'
+        -#          %tbody#tbody_checkboxes
+        -#            = collection_check_boxes :profesion, :profesion, Profesion.all.order(:nombre), :id,:nombre do |g|
+        -#              %tr
+        -#                %td
+        -#                  = g.check_box
+        -#                %td
+        -#                  = g.object.nombre
+    %br
+    %br
+    .row
+      .col-sm-2.col-sm-offset-5
+        %a.btn.btn-primary.btn-block#btn_procesar
+          Crear Lista de Invitados

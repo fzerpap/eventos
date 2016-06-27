@@ -1,0 +1,44 @@
+.row
+  .col-lg-12
+    .ibox.float-e-margins
+      .ibox-content
+        .row
+          .col-sm-3
+            = link_to new_invitado_path, class: 'btn btn-primary btn-responsive' do
+              Nueva Invitado
+              %i.fa.fa-plus
+        %br
+        %br
+        .row
+          .col-md-12
+            .table-responsive
+              %table.table.table-striped.table-bordered.table-hover.datatable-table
+                %thead.blue-bg
+                  %tr
+                    %th Fecha invitacion
+                    %th Fecha confirmacion
+                    %th Tipo confirmacion
+                    %th Contactos
+                    %th Eventos
+                    %th
+                    %th
+                %tbody
+                  - @invitados.each do |invitado|
+                    %tr
+                      %td= invitado.fecha_invitacion
+                      %td= invitado.fecha_confirmacion
+                      %td= invitado.tipo_confirmacion
+                      %td= invitado.contactos
+                      %td= invitado.eventos
+                      %td
+                        = link_to invitado,  rel: 'tooltip',  title: 'Ver' do
+                          %i.fa.fa-search
+                          &nbsp;
+                          &nbsp;
+                        = link_to edit_invitado_path(invitado), 'data-toggle'=> 'tooltip', 'data-placement' => 'left',  'title' => 'Editar' do
+                          %i.fa.fa-edit
+                          &nbsp;
+                          &nbsp;
+                        = link_to invitado, data: { confirm: '¿Está seguro de realizar esta acción?' }, method: :delete, 'data-toggle'=> 'tooltip', 'data-placement' => 'left',  'title' => 'Eliminar' do
+                          %i.fa.fa-trash
+                      %td

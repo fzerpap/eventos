@@ -1,0 +1,18 @@
+default: &default
+  host: localhost
+  adapter: postgresql
+  username: postgres
+  password: 123456
+
+development:
+  <<: *default
+  database: eventos_development
+
+test:
+  <<: *default
+  database:  eventos_test
+
+production:
+  <<: *default
+  database:  eventos_production
+

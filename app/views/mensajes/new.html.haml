@@ -1,0 +1,9 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-10
+    %h2
+      Mensajes
+      %i.fa.fa-envelope-o
+    %ol.breadcrumb
+      = render_breadcrumbs :tag => :li
+.wrapper.wrapper-content.animated.fadeInRight
+  = render 'form'

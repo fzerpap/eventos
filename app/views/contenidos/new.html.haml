@@ -1,0 +1,13 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-10
+    %h2
+      %i.fa.fa-home
+      Contenido
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Nuevo Contenido
+.wrapper.wrapper-content.animated.fadeInRight
+  = render 'form'

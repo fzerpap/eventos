@@ -1,0 +1,46 @@
+= form_for @inscripcion_evento, html: { class: "form-horizontal", role: "form" } do |f|
+  .ibox.float-e-margins
+    .ibox-content.border-bottom.form-horizontal
+      .form-group
+        = f.label :fecha, class: 'col-sm-2 control-label' do
+          Fecha de Preinscripción
+        .col-sm-10
+          = f.date_select :fecha, class: 'form-control'
+      .form-group
+        = f.label :aceptado, class: 'col-sm-2 control-label' do
+          Aprobación
+        .col-sm-3
+          - if @inscripcion_evento.aceptado.nil?
+            = text_field_tag "Por Aprobar", :aceptado, value: "Por Aprobar", class: 'form-control', readonly: 'readonly'
+          - elsif @inscripcion_evento.aceptado
+            = text_field_tag "Aceptado", :aceptado, value: "Aceptado", class: 'form-control' , readonly: 'readonly'
+          - else
+            = text_field_tag "Rechazado", :aceptado, value: "Rechazado", class: 'form-control', readonly: 'readonly'
+      .form-group
+        = f.label :fecha_aceptado, class: 'col-sm-2 control-label' do
+          Fecha de Aprobación
+        .col-sm-10
+          = f.date_select :fecha_aceptado, class: 'form-control'
+      .form-group
+        = f.label :nro_asiento, class: 'col-sm-2 control-label' do
+          Nro de Asiento:
+        .col-sm-3
+          = f.text_field :nro_asiento, class: 'form-control'
+      .form-group
+        = f.label :fecha_pago, class: 'col-sm-2 control-label' do
+          Fecha de Pago:
+        .col-sm-10
+          = f.date_select :fecha_pago, class: 'form-control'
+      .form-group
+        = f.label :nro_pago, class: 'col-sm-2 control-label' do
+          Nro de Pago:
+        .col-sm-3
+          = f.text_field :nro_pago, class: 'form-control'
+      .form-group
+        = f.label :monto, class: 'col-sm-2 control-label'
+        .col-sm-3
+          = f.text_field :monto, class: 'form-control'
+      .form-group
+        .col-sm-3.col-sm-offset-6
+          = f.submit class: 'btn btn-primary'
+

@@ -1,0 +1,51 @@
+.row
+  .col-lg-12
+    .ibox.float-e-margins
+      .ibox-content
+        .row
+          .col-md-12
+            = form_for :aprobar_preinscritos, url: aprobar_preinscritos_path, method: :post, id: 'aprobar_preinscritos' do |f|
+              .table-responsive
+                %table.table.table-striped.table-bordered.table-hover.datatable-table
+                  %thead.blue-bg
+                    %tr
+                      %th Nombres
+                      %th Apellidos
+                      %th Teléfono
+                      %th País
+                      %th Estado
+                      %th Iglesia
+                      %th Recomendado Por
+                      %th Profesión
+                      %th Ministerio
+                      %th Fecha
+                      %th Aprobar
+                      %th Rechazar
+                      %th N° Asiento
+                  %tbody
+                    - @inscripcion_eventos.each do |inscripcion|
+                      %tr
+                        = hidden_field_tag '[aprobar_inscripcion][][id_inscripcion]',inscripcion.id
+                        %td= inscripcion.contacto.nombres
+                        %td= inscripcion.contacto.apellidos
+                        %td= inscripcion.contacto.telefono
+                        %td= inscripcion.contacto.pais.nombre
+                        - if inscripcion.contacto.estado_id.nil?
+                          %td= "No Aplica"
+                        - else
+                          %td= inscripcion.contacto.estado.nombre
+                        %td= inscripcion.contacto.iglesia
+                        %td= inscripcion.contacto.recomendado_por
+                        %td= inscripcion.contacto.profesion.nombre
+                        %td= inscripcion.contacto.ministerio.nombre
+                        %td= inscripcion.fecha.strftime('%d-%m-%Y')
+                        %td
+                          = check_box_tag '[aprobar_inscripcion][][aceptado]',value = "1", checked = false
+                        %td
+                          = check_box_tag '[aprobar_inscripcion][][rechazado]',value = "0", checked = false
+                        %td
+                          = text_field_tag '[aprobar_inscripcion][][nro_asiento]'
+              .row
+                .col-md-2.col-md-offset-8
+                  = f.submit 'Aprobar Preinscritos', class: 'btn btn-success', data: { disable_with: "Por favor espere..." }
+

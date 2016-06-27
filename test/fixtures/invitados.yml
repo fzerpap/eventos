@@ -1,0 +1,16 @@
+# Read about fixtures at
+# http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  fecha_invitacion: 2016-06-02 15:43:14
+  fecha_confirmacion: 2016-06-02 15:43:14
+  tipo_confirmacion: 1
+  contactos: 
+  eventos: 
+
+two:
+  fecha_invitacion: 2016-06-02 15:43:14
+  fecha_confirmacion: 2016-06-02 15:43:14
+  tipo_confirmacion: 1
+  contactos: 
+  eventos: 

@@ -1,0 +1,34 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Zonas
+      %i.fa.fa-map
+    %ol.breadcrumb
+      = render_breadcrumbs
+.wrapper.wrapper-content.animated.fadeInRight
+  = render 'table_zonas', object: @zonas
+
+
+%div#form_zona_index{style:'display:none;'}
+  = render 'form'
+
+
+.row
+  .col-sm-12
+    .ibox.float-e-margins
+      .ibox-content
+        .row
+          .col-sm-3
+            = link_to  eventos_path, class: 'btn btn-success btn-responsive btn-block', data: {disable_with: 'Regresar Eventos'} do
+              %i.fa.fa-arrow-left
+              Regresar
+          .col-sm-3.col-sm-offset-5
+            - if Evento.tipo_plan_evento(@evento_id.id) == 'Intermedio' || Evento.tipo_plan_evento(@evento_id.id) == 'Full'
+              = link_to  evento_equipo_gestor_index_path(evento_id: @evento_id.id), class: 'btn btn-primary btn-responsive btn-block', data: {disable_with: 'Continuar Equipo Gestor'} do
+                %i.fa.fa-arrow-right
+                Continuar
+            -else
+              = link_to  evento_mensajes_path(evento_id: @evento_id.id), class: 'btn btn-primary btn-responsive btn-block', data: {disable_with: 'Continuar Mensaje'} do
+                %i.fa.fa-arrow-right
+                Continuar
+

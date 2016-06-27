@@ -1,0 +1,68 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-10
+    %h2
+      Mensaje Registrado
+      %i.fa.fa-envelope-o
+    %ol.breadcrumb
+      = render_breadcrumbs
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            .col-sm-5
+              %table.table.table-striped.table-bordered.table-condensed
+                %tbody
+                  %tr
+                    %td.text-right
+                      %strong Asunto:
+                    %td
+                      = @mensaje.asunto
+                  %tr
+                    %td.text-right
+                      %strong Remitente:
+                    %td
+                      = @mensaje.remitente? ? 'Si' : 'No'
+                  %tr
+                    %td.text-right
+                      %strong Descripcion:
+                    %td
+                      = @mensaje.descripcion
+                  %tr
+                    %td.text-right
+                      %strong Asiento:
+                    %td
+                      = @mensaje.asiento? ? 'Si' : 'No'
+                  %tr
+                    %td.text-right
+                      %strong Coordinador:
+                    %td
+                      = @mensaje.coordinador? ? 'Si' : 'No'
+                  %tr
+                    %td.text-right
+                      %strong Enlace:
+                    %td
+                      = @mensaje.enlace
+                  %tr
+                    %td.text-right
+                      %strong Evento:
+                    %td
+                      = @mensaje.evento.nombre
+                  %tr
+                    %td.text-right
+                      %strong Archivo adjunto:
+                    %td
+                      = image_tag(@mensaje.archivo_adjunto_url, width: 200, height: 200) if @mensaje.archivo_adjunto?
+                  %tr
+                    %td{colspan: '2', class: 'text-center'}
+                      %a{:href => @mensaje.archivo_adjunto_url } Bajar Archivo
+          .row
+            .col-sm-3
+              = link_to evento_mensajes_path, class: 'btn btn-success' do
+                %i.fa.fa-arrow-left
+                Regresar
+            .col-sm-3
+              = link_to edit_evento_mensaje_path( id: @mensaje.id), class: 'btn btn-primary' do
+                Editar
+                %i.fa.fa-edit

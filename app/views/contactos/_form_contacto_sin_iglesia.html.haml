@@ -1,0 +1,136 @@
+.wrapper.wrapper-content.animated.fadeInRight
+= form_for(@contacto, :url => url_for(controller: 'contactos', action: @contacto.persisted? ? 'update_contacto' : 'create_contacto',id: @contacto.id)) do |f|
+  .row
+    .col-md-12.white-bg
+      .ibox-content
+        .row
+          = render 'shared/error_messages', object: f.object, model: 'Contacto'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :nombres , class: 'col-sm-4 control-label' do
+                Nombres:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.text_field :nombres,class: 'form-control'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :apellidos , class: 'col-sm-4 control-label' do
+                Apellidos:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.text_field :apellidos,class: 'form-control'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :doc_identidad, class: 'col-sm-4 control-label' do
+                Documento de Identidad (Cédula o Pasaporte):
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.text_field :doc_identidad,class: 'form-control'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :email, class: 'col-sm-4 control-label' do
+                Correo Electrónico:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.email_field :email,class: 'form-control'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :email, class: 'col-sm-4 control-label' do
+                Confirmar Correo Electrónico:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.email_field :email_confirmation, value: @contacto.email? ? @contacto.email : '', class: 'form-control', required: 'required'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :fecha_nac , class: 'col-sm-4 control-label' do
+                Fecha de Nacimiento:
+                %span.fa.fa-asterisk.red
+              .col-sm-6.form-inline
+                = f.date_select :fecha_nac, options = {start_year: Date.today.year - 90, end_year: Date.today.year, use_two_digit_numbers: true}, html_options = { required: 'required', class: 'form-control',  format: :default}
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :sexo , class: 'col-sm-4 control-label' do
+                Sexo:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.select(:sexo, Contacto.enum_sexo.map { |x| [x.humanize.titleize, x]}, {include_blank: 'Seleccione Sexo'}, class: 'form-control')
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :estado_civil , class: 'col-sm-4 control-label' do
+                Estado Civil:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.select(:estado_civil, Contacto.enum_estado_civil.map { |x| [x.humanize.titleize, x]}, {include_blank: 'Seleccione el Estado Civil'}, class: 'form-control')
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = label_tag :pais_id, class: 'col-sm-4 control-label' do
+                Pais:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = collection_select :pais, :id, Pais.all, :id, :nombre, {selected:  @contacto.estado_id? ? @contacto.estado.pais_id : nil, include_blank: true},  {class: 'form-control'}
+          -if @contacto.estado_id
+            .row.col-sm-12.col-sm-offset-1
+              .form-group.col-sm-10
+                = f.label :estado_id, class: 'col-sm-4 control-label' do
+                  Estado:
+                  %span.fa.fa-asterisk.red
+                .col-sm-6
+                  = f.select :estado_id, options_from_collection_for_select(Estado.where( pais_id: @contacto.estado.pais_id), :id, :nombre, selected: @contacto.estado_id),{include_blank: true}, {class: 'form-control'}
+          -else
+            .row.col-sm-12.col-sm-offset-1#estado
+              .form-group.col-sm-10
+                = f.label :estado_id, class: 'col-sm-4 control-label' do
+                  Estado:
+                  %span.fa.fa-asterisk.red
+                .col-sm-6
+                  = f.select :estado_id, '', {selected: f.object.estado_id},{class: 'form-control'}
+          -if @contacto.telefono
+            .row.col-sm-12.col-sm-offset-1
+              .form-group.col-sm-10
+                = f.label :telefono , class: 'col-sm-4 control-label' do
+                  Teléfono:
+                  %span.fa.fa-asterisk.red
+                .col-sm-6
+                  .col-sm-3#codigo
+                    = text_field_tag :codigo_pais, @contacto.estado.pais.codigo,  class: 'form-control', disabled: 'disable'
+                  .col-sm-9
+                    = text_field_tag :telef, @contacto.telefono.sub(@contacto.estado.pais.codigo, ''), class: 'form-control'
+          -else
+            .row.col-sm-12.col-sm-offset-1
+              .form-group.col-sm-10#telefono
+                = f.label :telefono , class: 'col-sm-4 control-label' do
+                  Teléfono:
+                  %span.fa.fa-asterisk.red
+                .col-sm-6
+                  .col-sm-3#codigo
+                    = text_field_tag :codigo_pais, nil,  class: 'form-control'
+                  .col-sm-9
+                    = text_field_tag :telef, nil, class: 'form-control'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :profesion_id, class: 'col-sm-4 control-label' do
+                Profesión:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.collection_select(:profesion_id, Profesion.all.order(:nombre), :id,:nombre,
+                  {selected:  f.object.profesion_id.nil? ? nil : @contacto.profesion_id,
+                  include_blank: 'Seleccione una Profesión'},class:'form-control col-sm-1')
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.fields_for :contacto_empresas do |ff|
+                = ff.hidden_field :es_miembro, :value => false
+                = ff.hidden_field :empresa_id, :value => current_user.empresa.id
+  .row
+    .col-sm-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            .col-sm-2
+            .col-sm-3.col-sm-offset-7
+              = f.button class: 'btn btn-primary btn-responsive btn-block', data: {disable_with: 'Guardar Contacto'} do
+                Guardar Contacto
+                %i.fa.fa-floppy-o
+
+
+
+

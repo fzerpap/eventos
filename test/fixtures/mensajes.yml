@@ -1,0 +1,22 @@
+# Read about fixtures at
+# http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  asunto: MyString
+  remitente: false
+  descripcion: MyString
+  asiento: false
+  coordinador: false
+  enlace: MyString
+  archivo_adjunto: MyString
+  evento: 
+
+two:
+  asunto: MyString
+  remitente: false
+  descripcion: MyString
+  asiento: false
+  coordinador: false
+  enlace: MyString
+  archivo_adjunto: MyString
+  evento: 

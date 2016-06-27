@@ -1,0 +1,21 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Empresa:
+      = current_user.empresa.denominacion
+      %i.fa.fa-bars
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li
+        Registro de Contacto
+.wrapper.wrapper-content.animated.fadeInRight
+  - if current_user.empresa.nil?
+    .ibox-content.text-center
+      %h3.font-bold No se encuentra una empresa ingresada
+      .error-desc
+  -else
+    -if current_user.empresa.es_iglesia?
+      = render 'form_contacto_con_iglesia'
+    -else
+      = render 'form_contacto_sin_iglesia'

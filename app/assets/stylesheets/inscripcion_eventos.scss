@@ -1,0 +1,28 @@
+//= require dataTables/dataTables.bootstrap.css
+//= require dataTables/dataTables.responsive.css
+//= require dataTables/dataTables.tableTools.min.css
+//= require jquery-ui/jquery-ui-1.10.4.custom.min.css
+//= require jqGrid/ui.jqgrid.css
+//=require documentos
+//=require datatable
+
+.mostrar{
+  display: block;
+}
+.oculto{
+  display: none;
+}
+
+.blockUI{
+  background-color: #000;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  opacity: .8;
+  color: #fff;
+  font-size: 18px;
+}
+
+#icon-save-new-nivel, #icon-deshacer-new-nivel
+{
+  line-height: 2;
+}

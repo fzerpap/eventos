@@ -1,0 +1,14 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Nuevo Grupo
+      %i.fa.fa-bars
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li
+        = link_to 'Grupos Registrados', grupos_path
+      %li
+        Registro de Grupos
+.wrapper.wrapper-content.animated.fadeInRight
+  = render 'form'

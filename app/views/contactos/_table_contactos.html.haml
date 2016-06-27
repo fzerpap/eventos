@@ -1,0 +1,47 @@
+.row
+  .col-lg-12
+    .ibox.float-e-margins
+      .ibox-content
+        .row
+          .col-sm-3
+        -#= link_to({controller: "contactos", action: "new_contacto"}, {class: 'btn btn-primary btn-responsive'}) do
+        -#  Nuevo Contacto
+        -#  %i.fa.fa-plus
+        %br/
+        %br/
+        .row
+          .col-md-12
+            .table-responsive
+              %table.table.table-striped.table-bordered.table-hover.datatable-table
+                %thead.blue-bg
+                  %tr
+                    %th Nombres
+                    %th Apellidos
+                    %th Doc identidad
+                    %th Email
+                    %th Telefono
+                    %th Estado
+                    %th Profesion
+                    %th Acciones
+                %tbody
+                  - @contactos.each do |contacto|
+                    %tr
+                      %td= contacto.nombres
+                      %td= contacto.apellidos
+                      %td= contacto.doc_identidad
+                      %td= contacto.email
+                      %td= contacto.telefono
+                      %td
+                        - if contacto.estado_id.nil?
+                          = "No Aplica"
+                        - else
+                          = contacto.estado.nombre
+                      %td= contacto.profesion.nombre
+                      %td
+                        = link_to(controller: "contactos", action: "show_contacto", id: contacto.id, em: current_user.empresa.id )  do
+                          %i.fa.fa-search
+                        = link_to(controller: "contactos", action: "edit_contacto", id: contacto.id, em: current_user.empresa.id )  do
+                          %i.fa.fa-edit
+                        = link_to contacto, data: { confirm: '¿Está seguro de eliminar el contacto?' }, method: :delete, 'data-toggle'=> 'tooltip', 'data-placement' => 'left',  'title' => 'Eliminar' do
+                          %i.fa.fa-trash
+

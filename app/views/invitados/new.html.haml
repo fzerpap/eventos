@@ -1,0 +1,12 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-10
+    %h2
+      %i.fa.fa-bars
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Configuración de Invitación al Evento
+.wrapper.wrapper-content.animated.fadeInRight
+  = render 'crear_lista_invitados'

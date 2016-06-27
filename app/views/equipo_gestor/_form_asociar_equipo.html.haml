@@ -1,0 +1,23 @@
+.row
+  .col-md-12
+    .ibox-content
+      .row
+        .col-md-4
+          = label_tag :usuarios_roles, class: 'col-sm-4 text-right control-label' do
+            Nombre:
+            %span.fa.fa-asterisk.red
+          .col-sm-8
+            = autocomplete_field_tag :usuarios_roles, '', autocomplete_usuarios_roles_evento_equipo_gestor_index_path, class:'form-control',  onKeyUp: 'javascript:this.value=this.value.toUpperCase();'
+
+        .col-md-2
+          = button_tag 'Agregar Equipo', class: 'btn btn-primary btn-responsive btn-block', id: 'btn_agregar_equipo'
+      .row
+        %div#div_table_resultados{style:'display:none;'}
+          = hidden_field_tag :evento_id, @evento_id.id
+          = render 'table_agregar_equipo_gestor'
+      %br/
+      .row
+        #btn_guardar
+          .col-md-10
+          .col-md-2
+            = button_tag  'Guardar Equipo Gestor', class: 'btn btn-primary btn-responsive btn-block', id: 'btn_guardar_equipo'

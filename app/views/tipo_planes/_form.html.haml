@@ -1,0 +1,79 @@
+= form_for @tipo_plan, html: { class: 'form-horizontal', role: 'form' } do |f|
+  .row
+    .col-md-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            = render 'shared/error_messages', object: f.object, model: 'tipo_plan'
+            .row.col-sm-12.col-sm-offset-1
+              .form-group
+                = f.label :nombre, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Nombre:
+                .col-sm-6
+                  = f.text_field :nombre, class: 'form-control'
+              .form-group
+                = f.label :invitacion, class: 'col-sm-2 control-label' do
+                  Requiere Invitación:
+                .col-sm-2
+                  = f.check_box :invitacion, {}, true, class: 'form-control'
+              .form-group
+                = f.label :confirmacion, class: 'col-sm-2 control-label' do
+                  Requiere Confirmación:
+                .col-sm-2
+                  = f.check_box :confirmacion, {}, true, class: 'form-control'
+              .form-group
+                = f.label :inscripcion, class: 'col-sm-2 control-label' do
+                  Requiere Inscripción:
+                .col-sm-2
+                  = f.check_box :inscripcion, {}, true, class: 'form-control'
+              .form-group
+                = f.label :pago, class: 'col-sm-2 control-label' do
+                  Requiere Pago:
+                .col-sm-2
+                  = f.check_box :pago, {}, true, class: 'form-control'
+              .form-group
+                = f.label :validar_pago, class: 'col-sm-2 control-label' do
+                  Requiere Validar Pago:
+                .col-sm-2
+                  = f.check_box :validar_pago,{}, true, class: 'form-control'
+              .form-group
+                = f.label :baja, class: 'col-sm-2 control-label' do
+                  Requiere Baja:
+                .col-sm-6
+                  = f.check_box :baja, {}, true,class: 'form-control'
+              .form-group
+                = f.label :precheck_in, class: 'col-sm-2 control-label' do
+                  Requiere Precheck_in:
+                .col-sm-6
+                  = f.check_box :precheck_in, {}, true,class: 'form-control'
+              .form-group
+                = f.label :check_in, class: 'col-sm-2 control-label' do
+                  Requiere Check in:
+                .col-sm-2
+                  = f.check_box :check_in, {}, true, class: 'form-control'
+              .form-group
+                = f.label :contenido, class: 'col-sm-2 control-label' do
+                  Requiere Contenido:
+                .col-sm-2
+                  = f.check_box :contenido, {}, true, class: 'form-control'
+              .form-group
+                = f.label :estadisticas, class: 'col-sm-2 control-label' do
+                  Requiere Estadisticas:
+                .col-sm-2
+                  = f.check_box :estadisticas, {}, true, class: 'form-control'
+  .row
+    .col-sm-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            .col-sm-3
+              = link_to tipo_planes_path, class: 'btn btn-success' do
+                %i.fa.fa-arrow-left
+                Regresar
+            .col-sm-3.col-sm-offset-3
+              = f.button class: 'btn btn-primary btn-responsive btn-block', data: {disable_with: 'Guardar Plan'} do
+                Guardar Plan
+                %i.fa.fa-floppy-o
+
+

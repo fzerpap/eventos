@@ -1,0 +1,42 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Equipo Gestor
+      %span
+        %i.fa.fa-users
+    %ol.breadcrumb
+      = render_breadcrumbs :tag => :li
+.wrapper.wrapper-content.animated.fadeInRight
+- if @equipo_gestores.empty?
+  .row
+    .col-md-12
+      %ul.text-muted.leyenda
+        %li.text-justify
+          Puede registrar un Equipo Gestor haciendo click en
+          %span.amarillo
+            Nuevo Equipo Gestor
+  .ibox-content.text-center
+    %h3.font-bold No hay Equipo Gestores Registrados
+    =link_to  'Nuevo Equipo Gestor',  new_evento_equipo_gestor_path,  class: 'btn btn-primary pull-center'
+    %br
+    %br
+-else
+  = render 'table_equipo_gestor', object: @equipo_gestores
+
+%div#form_equipo_index{style:'display:none;'}
+  = render 'form_asociar_equipo'
+
+
+.row
+  .col-sm-12
+    .ibox.float-e-margins
+      .ibox-content
+        .row
+          .col-sm-3
+            = link_to  evento_zonas_path(evento_id: @evento_id.id), class: 'btn btn-success btn-responsive btn-block', data: {disable_with: 'Regresar Zonas'} do
+              %i.fa.fa-arrow-left
+              Regresar
+          .col-sm-3.col-sm-offset-5
+            = link_to evento_mensajes_path(evento_id: @evento_id.id), class: 'btn btn-primary btn-responsive btn-block', data: {disable_with: 'Continuar'} do
+              %i.fa.fa-arrow-right
+              Continuar

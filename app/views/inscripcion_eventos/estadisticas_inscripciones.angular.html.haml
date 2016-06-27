@@ -1,0 +1,57 @@
+= provide(:title, "Incripciones a Eventos")
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      %i.fa.fa-expand
+      Inscripciones de Eventos
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Estadísticas de Inscripciones
+.wrapper.wrapper-content.animated.fadeInRight
+  %div{ 'ng-app' => 'inscripcionEventos' }
+    %div{ ng_controller: 'InscripcionEventosController'}
+      .row.form-horizontal
+        .col-md-3
+          .form-group
+            = label_tag :evento, class: 'col-sm-3 control-label' do
+              Evento:
+            .col-sm-9
+              = select_tag :evento_id, options_for_select(@eventos.collect { |p| [p.nombre, p.id]}),
+               {include_blank: 'Seleccione el evento', class: 'form-control', 'ng-model' => 'evento_id'}
+        .col-md-3
+          .form-group
+            = label_tag :pais, class: 'col-sm-2 control-label' do
+              País:
+            .col-sm-10
+              = select_tag  :pais_id, options_for_select(@paises.collect { |p| [p.nombre, p.id]}),
+               {include_blank: 'Seleccione el país', class: 'form-control', 'ng-model' => 'pais_id'}
+        .col-md-6
+          .form-group
+            = label_tag :criterio, class: 'col-sm-2 control-label text-left' do
+              Criterio:
+            .col-sm-10.text-left
+              - [ 'estado', 'ministerio', 'profesion' ].each do |criterio|
+                .col-sm-3
+                  = radio_button_tag( :criterio, criterio,criterio=='estado' ? true : false, {'ng-model' => 'criterio'})
+                  = criterio.humanize
+      .row
+        .col-sm-4
+          %h2 {{criterio}}
+          %h2 {{evento_id}}
+      .row
+        .col-sm-2.col-sm-offset-5
+          %a.btn.btn-primary.btn-block{ ng_click: 'procesarEstadisticas()' }
+            Procesar
+      %br
+      %div{ ng_show: "mostrar_procesando" }
+        .row
+          .col-sm-2.col-sm-offset-5.text-center
+            %h2
+              Procesando
+              %br
+              %i.fa.fa-refresh.fa-spin.fa-2x
+      %div{ ng_show: "mostrar_resultados" }
+        = render 'table_estadisticas'

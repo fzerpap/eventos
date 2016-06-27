@@ -1,0 +1,37 @@
+= form_for  @<%= singular_table_name %>, html: { class: 'form-horizontal', role: 'form' } do |f|
+  .row
+    .col-md-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            = render 'shared/error_messages', object: f.object, model: <%=singular_table_name%>
+            .row.col-sm-12.col-sm-offset-1
+            <% attributes.each do |attribute| -%>
+              <%- if attribute.reference? -%>
+                = f.label :<%=attribute.name%>, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  <%= attribute.name %>:
+                .col-sm-6
+                  = f.collection_select :'#{ attribute.column_name}', '#{attribute.name.camelize}.all', :id, :name, { include_blank: 'Seleccione '},class:'form-control'
+              <%- else -%>
+                .form-group
+                  = f.label :<%=attribute.name%>, class: 'col-sm-2 control-label' do
+                    %span.fa.fa-asterisk.red
+                    <%= attribute.name %>:
+                  .col-sm-6
+                    = f.<%=attribute.field_type%> :<%=attribute.name%>,  class: 'form-control'
+              <%- end -%>
+            <% end -%>
+  .row
+    .col-sm-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            .col-sm-3
+              = link_to <%= index_helper %>_path, class: 'btn btn-success' do
+                %i.fa.fa-arrow-left
+                Regresar
+            .col-sm-3.col-sm-offset-3
+              = f.button class: 'btn btn-primary btn-responsive btn-block', data: {disable_with: 'Guardar'} do
+                Guardar
+                %i.fa.fa-floppy-o

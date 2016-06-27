@@ -1,0 +1,55 @@
+.row
+  .col-md-12
+    .ibox.float-e-margins
+      .ibox-content
+        .col-sm-3
+          - if can? :create, Evento
+            = button_tag class: 'btn btn-primary btn-responsive', id: 'btn_nuevo_evento' do
+              Nuevo Evento
+              %i.fa.fa-plus
+        %br/
+        %br/
+        %br/
+        .row
+          .col-md-12
+            .table-responsive
+              %table.table.table-striped.table-bordered.table-hover.datatable-table
+                %thead.blue-bg
+                  %tr
+                  %th Nombre
+                  %th Fecha inicio
+                  %th Fecha fin
+                  %th Nro. Invitados
+                  %th Lugar
+                  %th.text-center Acciones
+                  %th.text-center Zonas
+                  %th.text-center Equipo Gestor
+                  %th.text-center Mensajes
+                %tbody
+                  - @eventos.each do |evento|
+                    %tr
+                      %td= evento.nombre
+                      %td= evento.fecha_inicio.strftime('%d-%m-%Y')
+                      %td= evento.fecha_fin.strftime('%d-%m-%Y')
+                      %td= evento.num_invitados
+                      %td= evento.lugar
+                      %td.text-center
+                        - if can? :view, Evento
+                          = link_to evento do
+                            %i.fa.fa-search
+                        - if can? :update, Evento
+                          = link_to  edit_evento_path(evento) do
+                            %i.fa.fa-pencil-square-o
+                        - if (can? :destroy, Evento) && evento.safe_to_delete
+                          = link_to  evento, method: :delete, data: { confirm: '¿Seguro que desea Eliminar el Evento?' } do
+                            %i.fa.fa-trash-o
+                      %td.text-center
+                        - if !Zona.find_by_evento_id(evento.id).nil?
+                          = link_to 'Zonas', evento_zonas_path(evento.id)
+                      %td.text-center
+                        - if !EquipoGestor.find_by_evento_id(evento.id).nil?
+                          = link_to 'Equipo Gestor', evento_equipo_gestor_index_path(evento.id)
+                      %td.text-center
+                        - if !Mensaje.find_by_evento_id(evento.id).nil?
+                          = link_to 'Mensajes', evento_mensajes_path(evento.id)
+

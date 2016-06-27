@@ -1,0 +1,64 @@
+= form_for  [@evento_id, @mensaje], html: { class: 'form-horizontal', role: 'form', id: 'form_mensaje' } do |f|
+  .row
+    .col-md-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            = render 'shared/error_messages', object: f.object, model: 'Mensaje'
+            .row.col-sm-12.col-sm-offset-1
+              = f.hidden_field :evento_id, value: @evento_id.nil? ? '' : @evento_id.id
+              .form-group
+                = f.label :asunto, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Asunto:
+                .col-sm-6
+                  = f.text_field :asunto,  class: 'form-control'
+              .form-group
+                = f.label :remitente, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Incluir Nombre y Apellido del Remitente:
+                .col-sm-1
+                  = f.check_box :remitente, {}, true, class: 'form-control'
+              .form-group
+                = f.label :descripcion, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Descripcion:
+                .col-sm-6
+                  = f.text_area :descripcion,  class: 'form-control'
+              .form-group
+                = f.label :asiento, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Incluir Nro. de Asiento:
+                .col-sm-1
+                  = f.check_box :asiento, {}, true, class: 'form-control'
+              .form-group
+                = f.label :coordinador, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Incluir Nombre y Apellido del Coordinador:
+                .col-sm-1
+                  = f.check_box :coordinador, {}, true, class: 'form-control'
+              .form-group
+                = f.label :enlace, class: 'col-sm-2 control-label' do
+                  Enlace:
+                .col-sm-6
+                  = f.text_field :enlace,  class: 'form-control'
+              .form-group
+                = f.label :archivo_adjunto, class: 'col-sm-2 control-label' do
+                  Archivo_adjunto:
+                .col-sm-6
+                  = render 'subir_documento',f: f
+
+
+  .row
+    .col-sm-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            .col-sm-3
+              = link_to evento_mensajes_path(@evento_id), class: 'btn btn-success' do
+                %i.fa.fa-arrow-left
+                Regresar
+            .col-sm-3.col-sm-offset-3
+              = f.button class: 'btn btn-primary btn-responsive btn-block', data: {disable_with: 'Guardar'} do
+                Guardar y Continuar
+                %i.fa.fa-floppy-o

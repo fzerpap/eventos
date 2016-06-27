@@ -1,0 +1,86 @@
+= provide(:title, "Registro de Pago a Evento")
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10.col-md-offset-2
+    %h2
+      %i.fa.fa-expand
+      Evento:
+      = @inscripcion_evento.evento.nombre
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Registre su Ofrenda
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    = form_for(@inscripcion_evento, :url => url_for(controller: 'pago_eventos', action: 'update_pago',id: @inscripcion_evento.id )) do |f|
+      .ibox.float-e-margins
+        .ibox-content.form-horizontal
+          .row.col-sm-12.col-sm-offset-0
+            .form-group
+              = f.label :nombres , class: 'col-sm-4 control-label' do
+                Nombres y Apellidos:
+              .col-sm-4
+                = f.text_field :nombres, :value => @inscripcion_evento.contacto.nombres+' '+@inscripcion_evento.contacto.nombres, autofocus: true, class: 'form-control',  readonly: 'readonly'
+          .row.col-sm-12.col-sm-offset-0
+            .form-group
+              = f.label :doc_identidad , class: 'col-sm-4 control-label' do
+                Documento de Identidad:
+              .col-sm-4
+                = f.text_field :doc_identidad, :value => @inscripcion_evento.contacto.doc_identidad, autofocus: true, class: 'form-control',  readonly: 'readonly'
+          .row.col-sm-12.col-sm-offset-0
+            .form-group
+              = f.label :email , class: 'col-sm-4 control-label' do
+                E-mail:
+              .col-sm-4
+                = f.text_field :email, :value => @inscripcion_evento.contacto.email, autofocus: true, class: 'form-control',  readonly: 'readonly'
+          .row.col-sm-12.col-sm-offset-0
+            .form-group
+              = f.label :fecha_pago, class: 'col-sm-4 control-label' do
+                Fecha de Transferencia o Depósito:
+              .col-sm-7.col-sm-offset-1
+              = f.date_select :fecha_pago, class: 'form-control', selected: Date.today
+          .row.col-sm-12.col-sm-offset-0
+            .form-group
+              = f.label :nro_pago, class: 'col-sm-4 control-label' do
+                Nro de Confirmación o Depósito:
+              .col-sm-4
+                = f.text_field :nro_pago, class: 'form-control',  required: 'required'
+          .row.col-sm-12.col-sm-offset-0
+            .form-group
+              = f.label :monto, class: 'col-sm-4 control-label'
+              .col-sm-4
+                = f.number_field :monto, class: 'form-control', required: 'required', min: 1
+          .row.col-sm-12.col-sm-offset-0
+            - if @fuente == 'validar_pago'
+              .form-group
+                = f.label :validar, class: 'col-sm-4 control-label' do
+                  Validar Pago:
+                .col-sm-1
+                  = f.check_box :pago_validado, class: 'form-control'
+          .row.col-sm-12.col-sm-offset-0
+            .form-group
+              - if @fuente == 'validar_pago'
+                = label_tag :documento, class: 'col-sm-4 control-label' do
+                  Ver la Transferencia o Depósito:
+              - else
+                = f.label :documento, class: 'col-sm-4 control-label' do
+                  Subir Copia de la Transferencia o Depósito:
+              .col-sm-4
+                - if @fuente == 'validar_pago'
+                  = link_to 'Ver documento' , f.object.documento_url, target: '_blank', class: 'btn btn-primary'
+                -else
+                  - if f.object.documento_url
+                    = text_field_tag :documento, f.object.documento_identifier,  class: 'form-control',  readonly: 'readonly'
+                  -else
+                    = f.file_field :documento, class: 'form-control', required: 'required'
+          .row.col-sm-12.col-sm-offset-0
+            .form-group
+              .col-sm-3.col-sm-offset-8
+                - if @fuente == 'validar_pago'
+                  = f.submit 'Validar/Autorizar/Notificar', class: 'btn btn-primary'
+                  = f.hidden_field(:fuente, value: 'validar_pago')
+                - else
+                  = f.submit 'Enviar Registro de Pago', class: 'btn btn-primary', id: 'procesar_registro'
+                  = f.hidden_field(:fuente, value: 'registrar_pago')
+

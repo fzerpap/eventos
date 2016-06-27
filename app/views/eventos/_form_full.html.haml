@@ -1,0 +1,24 @@
+.form-group
+  = f.label :aprobacion , class: 'col-sm-2 control-label' do
+    La Inscripcion requiere aprobación:
+    %span.fa.fa-asterisk.red
+  .col-sm-6
+    = f.check_box :aprobacion, {}, true, class: 'form-control'
+.form-group
+  = f.label :fecha_limite_pago , class: 'col-sm-2 control-label' do
+    Fecha limite de pago:
+    %span.fa.fa-asterisk.red
+  .col-sm-6
+    = f.date_select :fecha_limite_pago, class: 'form-control'
+.form-group
+  = f.label :fecha_limite_baja , class: 'col-sm-2 control-label' do
+    Fecha limite de baja:
+    %span.fa.fa-asterisk.red
+  .col-sm-6
+    = f.date_select :fecha_limite_baja, class: 'form-control'
+.form-group
+  = f.label :porc_penalizacion , class: 'col-sm-2 control-label' do
+    &#37; de Penalización:
+    %span.fa.fa-asterisk.red
+  .col-sm-6
+    = f.number_field :porc_penalizacion,class: 'form-control'

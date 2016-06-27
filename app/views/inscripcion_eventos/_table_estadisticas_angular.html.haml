@@ -1,0 +1,42 @@
+.row
+  .col-md-12
+    .ibox.float-e-margins
+      .ibox-content
+        .row
+          .col-lg-12
+            %div{:style => "text-align: right"}
+              %br
+                %br
+                  %button.btn.btn-success{:onClick => "$('#table_resultados').tableExport({type: 'excel', escape: 'false'});"}
+                    %i.fa.fa-file-excel-o
+                    Export Excel
+                  %button.btn.btn-success#printPdf
+                    %i.fa.fa-file-pdf-o
+                    Export PDF
+                  %br
+            .table-responsive
+              %table.table.table-striped.table-bordered.table-hover.display#table_resultados
+                %thead
+                  %th.align-center
+                    Criterio
+                  %th.align-center
+                    Preinscritos
+                  %th.align-center
+                    Aprobados
+                  %th.align-center
+                    Rechazados
+                  %th.align-center
+                    Por Aprobar
+                %tbody#tbody_resultados
+                  %tr{ng_repeat: "(key, est) in estadisticas"}
+                    %td
+                      {{key | uppercase}}
+                    %td{ class: 'text-right'}
+                      {{est[0]}}
+                    %td{ class: 'text-right'}
+                      {{est[1]}}
+                    %td{ class: 'text-right'}
+                      {{est[2]}}
+                    %td{ class: 'text-right'}
+                      {{est[3]}}
+

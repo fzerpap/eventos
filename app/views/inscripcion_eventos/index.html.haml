@@ -1,0 +1,29 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Aprobación de Preinscritos:
+      = @evento.present? ? @evento.nombre : nil
+      %i.fa.fa-bars
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li
+        Preinscritos Registrados:
+        = @estadisticas[0]+@estadisticas[1]+@estadisticas[2]
+      %li
+        Preinscritos Abrobados:
+        = @estadisticas[0]
+      %li
+        Preinscritos Rechazados:
+        = @estadisticas[1]
+      %li
+        Preinscritos Por Aprobar:
+        = @estadisticas[2]
+.wrapper.wrapper-content.animated.fadeInRight#pagina_index_tiendas
+  -if @inscripcion_eventos.blank?
+    .ibox-content.text-center
+      %h3.font-bold  No Posee Inscrpciones de ningún evento Registrados
+      %br/
+      %br/
+  -else
+    = render 'table_inscripcion_eventos', object: @inscripcion_eventos

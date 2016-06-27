@@ -1,0 +1,126 @@
+= form_for(@contacto, :url => url_for(controller: 'contactos', action: @contacto.persisted? ? 'update_contacto' : 'create_contacto',id: @contacto.id)) do |f|
+  .row
+    .col-md-12
+      .ibox-content
+        .row
+          = render 'shared/error_messages', object: f.object, model: 'Contacto'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :nombres , class: 'col-sm-4 control-label' do
+                Nombres:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.text_field :nombres,class: 'form-control'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :apellidos , class: 'col-sm-4 control-label' do
+                Apellidos:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.text_field :apellidos,class: 'form-control'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :doc_identidad, class: 'col-sm-4 control-label' do
+                Documento de Identidad (Cédula o Pasaporte):
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.text_field :doc_identidad,class: 'form-control'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :email, class: 'col-sm-4 control-label' do
+                Correo Electrónico:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.email_field :email,class: 'form-control'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :email, class: 'col-sm-4 control-label' do
+                Confirmar Correo Electrónico:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.email_field :email_confirmation, value: @contacto.email? ? @contacto.email : '', class: 'form-control', required: 'required'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :fecha_nac , class: 'col-sm-4 control-label' do
+                Fecha de Nacimiento:
+                %span.fa.fa-asterisk.red
+              .col-sm-6.form-inline
+                = f.date_select :fecha_nac, options = {start_year: Date.today.year - 90, end_year: Date.today.year, use_two_digit_numbers: true}, html_options = { required: 'required', class: 'form-control',  format: :default}
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :sexo , class: 'col-sm-4 control-label' do
+                Sexo:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.select(:sexo, Contacto.enum_sexo.map { |x| [x.humanize.titleize, x]}, {include_blank: 'Seleccione Sexo'}, class: 'form-control')
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :estado_civil , class: 'col-sm-4 control-label' do
+                Estado Civil:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.select(:estado_civil, Contacto.enum_estado_civil.map { |x| [x.humanize.titleize, x]}, {include_blank: 'Seleccione el Estado Civil'}, class: 'form-control')
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = label_tag :pais_id, class: 'col-sm-4 control-label' do
+                Pais:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                =text_field_tag :pais_id, @empresa.estado.pais.nombre,  class: 'form-control', disabled: 'disable'
+                = hidden_field_tag :pais_id, @empresa.estado.pais.id
+                %br/
+              = f.label :estado_id, class: 'col-sm-4 control-label' do
+                Estado:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.text_field :estado, value: @empresa.estado.nombre,  class: 'form-control', disabled: 'disable'
+                = f.hidden_field :estado_id, value: @empresa.estado.id
+                %br/
+              = f.label :telefono , class: 'col-sm-4 control-label' do
+                Teléfono:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                .col-sm-3
+                  = text_field_tag :codigo_pais, @empresa.estado.pais.codigo,  class: 'form-control', disabled: 'disable'
+                .col-sm-9
+                  = text_field_tag :telef, @contacto.telefono? ? @contacto.telefono.sub(@contacto.estado.pais.codigo, '') : '', class: 'form-control'
+          .row.col-sm-12.col-sm-offset-1
+            .form-group.col-sm-10
+              = f.label :profesion_id, class: 'col-sm-4 control-label' do
+                Profesión:
+                %span.fa.fa-asterisk.red
+              .col-sm-6
+                = f.collection_select(:profesion_id, Profesion.all.order(:nombre), :id,:nombre,
+                  {selected:  f.object.profesion_id.nil? ? nil : @contacto.profesion_id,
+                  include_blank: 'Seleccione una Profesión'},class:'form-control col-sm-1')
+
+          .row.col-sm-12.col-sm-offset-1
+            = f.fields_for :contacto_empresas do |ff|
+              = render 'form_contacto_empresa', ff: ff
+            #es_miembro
+              .form-group.col-sm-10
+                = f.label :ministerio_id, class: 'col-sm-4 control-label' do
+                  Ministerio:
+                .col-sm-6
+                  = f.collection_select(:ministerio_id, Ministerio.all.order(:nombre), :id,:nombre,
+                    {selected:  f.object.ministerio_id.nil? ? nil : @contacto.ministerio_id,
+                    include_blank: 'Seleccione un Ministerio'},class:'form-control col-sm-1')
+              .form-group.col-sm-10
+                = f.label :hijos, class: 'col-sm-4 control-label' do
+                  N° Hijos:
+                .col-sm-6
+                  = f.number_field :hijos,class: 'form-control', min: '0'
+  .row
+    .col-sm-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            .col-sm-2
+            .col-sm-3.col-sm-offset-7
+              = f.button class: 'btn btn-primary btn-responsive btn-block', data: {disable_with: 'Guardar Contacto'} do
+                Guardar Contacto
+                %i.fa.fa-floppy-o
+
+
+
+

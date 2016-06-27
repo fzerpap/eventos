@@ -1,0 +1,14 @@
+.form-group.col-sm-10
+  = ff.label :es_miembro , class: 'col-sm-4 control-label' do
+    Es miembro de la iglesia?
+    %span.fa.fa-asterisk.red
+  .col-sm-8
+    .col-sm-2.text-right
+      = label_tag 'Si'
+    .col-sm-2
+      = ff.radio_button :es_miembro, true
+    .col-sm-2.text-right
+      = label_tag 'No'
+    .col-sm-2
+      = ff.radio_button :es_miembro, false, checked: true
+    = ff.hidden_field :empresa_id, :value => @empresa.id

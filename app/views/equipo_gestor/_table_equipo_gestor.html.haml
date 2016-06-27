@@ -1,0 +1,32 @@
+.row
+  .col-md-12
+    .ibox.float-e-margins
+      .ibox-content
+        .col-sm-3
+          = button_tag class: 'btn btn-primary btn-responsive', id: 'btn_nuevo_equipo' do
+            Nuevo Equipo Gestor
+            %i.fa.fa-plus
+        %br/
+        %br/
+        %br/
+        .row
+          .col-md-12
+            .table-responsive
+              %table.table.table-striped.table-bordered.table-hover.datatable-table
+                %thead.blue-bg
+                  %tr
+                  %th Nombre
+                  %th Email
+                  %th Teléfono
+                  %th Rol
+                  %th.text-center Acciones
+                %tbody
+                  - @equipo_gestores.each do |equipo|
+                    %tr
+                      %td= equipo.user.name
+                      %td= equipo.user.email
+                      %td= equipo.user.cellphone
+                      %td= equipo.user.role.name
+                      %td.text-center
+                        = link_to evento_equipo_gestor_path(evento_id: equipo.evento_id,id: equipo.id), data: { confirm: "¿Está seguro de eliminar el miembro del equipo " + equipo.user.name + "?" }, method: :delete, 'data-toggle'=> 'tooltip', 'data-placement' => 'left',  'title' => 'Eliminar' do
+                          %i.fa.fa-trash

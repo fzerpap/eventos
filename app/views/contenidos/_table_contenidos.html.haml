@@ -1,0 +1,54 @@
+.row
+  .col-lg-12
+    .ibox.float-e-margins
+      .ibox-content
+        .row
+          .col-sm-3
+
+            = link_to new_contenido_path, class: 'btn btn-primary btn-responsive' do
+              Nuevo Contenido
+              %i.fa.fa-plus
+      %br /
+      %br /
+      .row
+        .col-md-12
+          .table-responsive
+            %table.table.table-striped.table-bordered.table-hover.datatable-table
+              %thead.blue-bg
+                %tr
+                  %th
+                    Titulo
+                  %th
+                    Autor
+                  %th
+                    Nombre del Archivo
+                  %th
+                    Tipo de Contenido
+                  %th
+                    Tipo de Archivo
+                  %th
+                    Acciones
+              %tbody
+                - @contenidos.each do |contenido|
+                  %tr
+                    %td
+                      = contenido.titulo
+                    %td
+                      = contenido.autor
+                    %td
+                      = contenido.nombre_archivo
+                    %td
+                      = contenido.tipo_contenido.nombre
+                    %td
+                      = contenido.tipo_archivo
+                    %td
+                      = link_to contenido,  rel: 'tooltip',  title: 'Ver' do
+                        %i.fa.fa-search
+                        &nbsp;
+                        &nbsp;
+                      = link_to edit_contenido_path(contenido), 'data-toggle'=> 'tooltip', 'data-placement' => 'left',  'title' => 'Editar' do
+                        %i.fa.fa-edit
+                        &nbsp;
+                        &nbsp;
+                      = link_to contenido, data: { confirm: '¿Está seguro de realizar esta acción?' }, method: :delete, 'data-toggle'=> 'tooltip', 'data-placement' => 'left',  'title' => 'Eliminar' do
+                        %i.fa.fa-trash

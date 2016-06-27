@@ -1,0 +1,31 @@
+= render 'title'
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      %i.fa.fa-user
+      = current_user.empresa.denominacion
+      \- Gestión de Usuarios de la Institución
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li
+        Gestión de Usuarios de la Institución
+
+.wrapper.wrapper-content.animated.fadeInRight
+  - if @users.empty?
+    - if can? :create, User
+      .row
+        .col-md-12
+          %ul.text-muted.leyenda
+            %li.text-justify
+              Puede registrar un Usuario haciendo click en
+              %span.amarillo
+                Nuevo Usuario
+    .ibox-content.text-center
+      %h3.font-bold No hay Usuarios Registrados
+      - if can? :create, User
+        =link_to  'Nuevo Usuario', new_client_user_path ,  class: 'btn btn-primary pull-center'
+        %br/
+        %br/
+  -else
+    = render 'table_client_users', object: @users

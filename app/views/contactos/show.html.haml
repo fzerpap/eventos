@@ -1,0 +1,90 @@
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+      .ibox.float-e-margins
+        .ibox-title
+          %h1
+          %strong Preinscripción Enviada Satisfactoriamente. En las próximas horas recibirá respuesta en su correo electrónico.
+        .ibox-content
+          .row
+            .col-sm-5
+              %table.table.table-striped.table-bordered.table-condensed
+                %tbody
+                  %tr
+                    %td.text-right
+                      %strong Nombres:
+                    %td
+                      = @contacto.nombres
+                  %tr
+                    %td.text-right
+                      %strong Apellidos:
+                    %td
+                      = @contacto.apellidos
+                  %tr
+                    %td.text-right
+                      %strong Doc. de Identidad:
+                    %td
+                      = @contacto.doc_identidad
+                  %tr
+                    %td.text-right
+                      %strong Email:
+                    %td
+                      = @contacto.email
+                  %tr
+                    %td.text-right
+                      %strong Telefono:
+                    %td
+                      = @contacto.telefono
+                  %tr
+                    %td.text-right
+                      %strong Iglesia:
+                    %td
+                      = @contacto.iglesia
+                  %tr
+                    %td.text-right
+                      %strong Recomendado por:
+                    %td
+                      = @contacto.recomendado_por
+                  %tr
+                    %td.text-right
+                      %strong País:
+                    %td
+                      = @contacto.pais.nombre
+                  %tr
+                    %td.text-right
+                      %strong Estado:
+                    %td
+                      - if @contacto.estado_id.nil?
+                        = "No Aplica"
+                      - else
+                        = @contacto.estado.nombre
+                  %tr
+                    %td.text-right
+                      %strong Profesion:
+                    %td
+                      = @contacto.profesion.nombre
+                  %tr
+                    %td.text-right
+                      %strong Ministerio:
+                    %td
+                      = @contacto.ministerio.nombre
+                  %tr
+                    %td.text-right
+                      %strong Aprobación:
+                    %td
+                      %strong Por Aprobar..
+                  %tr
+                    %td.text-right
+                      %strong Importante:
+                    %td
+                      %strong Si usted no recibe un correo electrónico, por favor revise
+                      su carpeta de correo span
+          .row
+            .col-sm-3
+              = link_to root_path, class: 'btn btn-default' do
+                %i.fa.fa-arrow-left
+                Regresar a la Página Principal
+            .col-sm-3
+              = link_to edit_contacto_path(@contacto), class: 'btn btn-primary' do
+                Editar la Preinscripción
+                %i.fa.fa-edit

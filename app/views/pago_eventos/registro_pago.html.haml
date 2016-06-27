@@ -1,0 +1,34 @@
+= provide(:title, "Registro de Pago a Evento")
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10.col-md-offset-2
+    %h2
+      %i.fa.fa-expand
+      Evento:
+      = @evento.nombre
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Registre su Ofrenda
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    = form_for(@evento, :url => url_for(controller: 'pago_eventos', action: 'obtener_inscrito_evento',method: 'post')) do |f|
+      .ibox.float-e-margins
+        .ibox-content.form-horizontal
+          .row.form-horizontal
+            .col-md-6
+              .form-group
+                = label_tag :email, class: 'col-sm-4 control-label text-left' do
+                  Ingrese su e-mail:
+                .col-sm-8.text-left
+                  = email_field_tag :email, nil, class: 'form-control'
+                = f.hidden_field :evento, value: @evento.id
+            .col-sm-6
+              .col-sm-3
+                = f.button class: 'btn btn-primary btn-responsive btn-block' do
+                  Procesar
+                  %i.fa.fa-floppy-o
+
+
+

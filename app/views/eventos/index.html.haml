@@ -1,0 +1,34 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Eventos
+      %span
+        %i.fa.fa-tasks
+    %ol.breadcrumb
+      = render_breadcrumbs :tag => :li
+.wrapper.wrapper-content.animated.fadeInRight
+  - if @eventos.empty?
+    - if can? :create, Evento
+      .row
+        .col-md-12
+          %ul.text-muted.leyenda
+            %li.text-justify
+              Puede registrar un Evento haciendo click en
+              %span.amarillo
+                Nuevo Evento
+    .ibox-content.text-center
+      %h3.font-bold No hay Eventos Registrados
+      - if can? :create, Evento
+        =link_to  'Nuevo Evento',new_evento_path ,  class: 'btn btn-primary pull-center'
+        %br/
+        %br/
+  -else
+    = render 'table_eventos', object: @eventos
+
+%div#form_evento_index{style:'display:none;'}
+  = render 'form_select_tipo_plan'
+#form_libre{style: 'display:none;'}
+  = render 'form'
+%br/
+%br/
+%br/

@@ -1,0 +1,46 @@
+= provide(:title, "Incripciones a Eventos")
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      %i.fa.fa-expand
+      Inscripciones de Eventos
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Estadísticas de Inscripciones
+.wrapper.wrapper-content.animated.fadeInRight
+  .row.form-horizontal
+    .col-md-4
+      .form-group
+        = label_tag :evento, class: 'col-sm-3 control-label' do
+          Evento:
+        .col-sm-9
+          = select_tag :evento_id, options_for_select(@eventos.collect { |p| [p.nombre, p.id]}),
+           {include_blank: 'Seleccione el evento', class: 'form-control',id: 'evento_select'}
+    .col-md-8
+      .form-group
+        = label_tag :criterio, class: 'col-sm-2 control-label text-left' do
+          Criterio:
+        .col-sm-10.text-left
+          - [ 'estado', 'ministerio', 'profesion' ].each do |criterio|
+            .col-sm-3
+              = radio_button_tag( :criterio, criterio,criterio=='estado' ? true : false)
+              = criterio.humanize
+  .row
+    .col-sm-2.col-sm-offset-5
+      %a.btn.btn-primary.btn-block#btn_procesar_estadisticas
+        Procesar
+  %br
+  %div#div_procesando
+  .row#msg_procesando{style:'display:none;'}
+    .col-sm-2.col-sm-offset-5.text-center
+      %h2
+        Procesando
+        %br
+        %i.fa.fa-refresh.fa-spin.fa-2x
+  %div#div_table_resultados{style:'display:none;'}
+    = render 'table_estadisticas'
+
+

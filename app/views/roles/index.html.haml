@@ -1,0 +1,14 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      %i.fa.fa-key
+      Roles
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Roles
+
+.wrapper.wrapper-content.animated.fadeInRight
+  =render 'table_roles', object: @roles

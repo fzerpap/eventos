@@ -1,0 +1,50 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-10
+    %h2
+      Zona Registrada
+      %i.fa.fa-map
+    %ol.breadcrumb
+      = render_breadcrumbs
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            .col-sm-5
+              %table.table.table-striped.table-bordered.table-condensed
+                %tbody
+                  %tr
+                    %td.text-right
+                      %strong Nombre:
+                    %td
+                      = @zona.nombre
+                  %tr
+                    %td.text-right
+                      %strong Cupos:
+                    %td
+                      = @zona.cupos
+                  %tr
+                    %td.text-right
+                      %strong Precio:
+                    %td
+                      = @zona.precio
+                  %tr
+                    %td.text-right
+                      %strong Num asiento inicial:
+                    %td
+                      = @zona.num_asiento_inicial
+                  %tr
+                    %td.text-right
+                      %strong Num asiento final:
+                    %td
+                      = @zona.num_asiento_final
+          .row
+            .col-sm-3
+              = link_to evento_zonas_path, class: 'btn btn-success' do
+                %i.fa.fa-arrow-left
+                Regresar
+            .col-sm-3
+              = link_to edit_evento_zona_path(id: @zona.id), class: 'btn btn-primary' do
+                Editar
+                %i.fa.fa-edit

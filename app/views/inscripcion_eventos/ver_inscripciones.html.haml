@@ -1,0 +1,77 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Lista de Preinscritos:
+      = @evento.present? ? @evento.nombre : nil
+      %i.fa.fa-bars
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li
+        Preinscritos Registrados:
+        = @estadisticas[0]+@estadisticas[1]+@estadisticas[2]
+      %li
+        Preinscritos Abrobados:
+        = @estadisticas[0]
+      %li
+        Preinscritos Rechazados:
+        = @estadisticas[1]
+      %li
+        Preinscritos Por Aprobar:
+        = @estadisticas[2]
+.wrapper.wrapper-content.animated.fadeInRight#pagina_index_inscripciones
+  .row
+    .col-md-12
+      .table-responsive
+        %table.table.table-striped.table-bordered.table-hover.datatable-table
+          %thead
+            %tr
+              %th Nombres
+              %th Apellidos
+              %th Teléfono
+              %th País
+              %th Estado
+              %th Email
+              %th Iglesia
+              %th Recomendado Por
+              %th Ministerio
+              %th Profesion
+              %th Fecha
+              %th Status
+              %th Asiento
+              %th Acciones
+          %tbody
+            - @inscripcion_eventos.each do |inscripcion|
+              %tr
+                %td= inscripcion.contacto.nombres
+                %td= inscripcion.contacto.apellidos
+                %td= inscripcion.contacto.telefono
+                %td= inscripcion.contacto.pais.nombre
+                - if inscripcion.contacto.estado_id.nil?
+                  %td= "No Aplica"
+                - else
+                  %td= inscripcion.contacto.estado.nombre
+                %td= inscripcion.contacto.email
+                %td= inscripcion.contacto.iglesia
+                %td= inscripcion.contacto.recomendado_por
+                %td= inscripcion.contacto.ministerio.nombre
+                %td= inscripcion.contacto.profesion.nombre
+                %td= inscripcion.fecha.strftime('%d-%m-%Y')
+                - if inscripcion.aceptado.nil?
+                  %td= "Por Aprobar"
+                - elsif inscripcion.aceptado
+                  %td= "Aceptado"
+                - else
+                  %td= "Rechazado"
+                %td= inscripcion.nro_asiento
+                %td.text-center
+                  - if can? :update, InscripcionEvento
+                    = link_to  edit_inscripcion_evento_path(inscripcion) do
+                      %i.fa.fa-pencil-square-o
+                  - if (can? :destroy, InscripcionEvento)
+                    = link_to  inscripcion, method: :delete,
+                     data: { confirm: "¿Seguro que desea eliminar la inscripción y los datos de contacto de: #{inscripcion.contacto.nombres} #{inscripcion.contacto.apellidos}?" } do
+                      %i.fa.fa-trash-o
+      .row
+        .col-md-2.col-md-offset-8
+          = link_to 'Regresar', root_path, class: 'btn btn-info btn-block'

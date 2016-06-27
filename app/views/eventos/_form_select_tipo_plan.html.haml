@@ -1,0 +1,8 @@
+.row.col-md-12.col-sm-offset-1
+  %br/
+  .form-group
+    .col-md-2.text-right
+      = label :tipo_plan_id_select, 'Tipo_plan:', class:'control-label'
+      %span.fa.fa-asterisk.red.text-left
+    .col-md-6.text-left
+      = select_tag :tipo_plan_id_select, options_for_select(TipoPlan.all.collect { |t| [t.nombre, t.id, t.nombre]}), {include_blank: 'Tipo de Plan', class: 'form-control', id: 'tipo_plan_select'}

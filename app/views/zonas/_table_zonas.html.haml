@@ -1,0 +1,43 @@
+.row
+  .col-lg-12
+    .ibox.float-e-margins
+      .ibox-content
+        .row
+          .col-sm-3
+            = button_tag  class: 'btn btn-primary btn-responsive', id: 'btn_nuevo_zona' do
+              Nueva Zona
+              %i.fa.fa-plus
+
+        %br
+        %br
+        .row
+          .col-md-12
+            .table-responsive
+              %table.table.table-striped.table-bordered.table-hover.datatable-table
+                %thead.blue-bg
+                  %tr
+                    %th Nombre
+                    %th Cupos
+                    %th Precio
+                    %th Num asiento inicial
+                    %th Num asiento final
+                    %th Acciones
+                %tbody
+                  - @zonas.each do |zona|
+                    %tr
+                      %td= zona.nombre
+                      %td= zona.cupos
+                      %td= zona.precio
+                      %td= zona.num_asiento_inicial
+                      %td= zona.num_asiento_final
+                      %td
+                        = link_to evento_zona_path(evento_id: zona.evento_id, id: zona.id),  rel: 'tooltip',  title: 'Ver' do
+                          %i.fa.fa-search
+                          &nbsp;
+                          &nbsp;
+                        = link_to edit_evento_zona_path(evento_id: zona.evento_id, id: zona.id), 'data-toggle'=> 'tooltip', 'data-placement' => 'left',  'title' => 'Editar' do
+                          %i.fa.fa-edit
+                          &nbsp;
+                          &nbsp;
+                        = link_to evento_zona_path(evento_id: zona.evento_id, id: zona.id), data: { confirm: '¿Está seguro de realizar esta acción?' }, method: :delete , 'data-toggle'=> 'tooltip', 'data-placement' => 'left',  'title' => 'Eliminar' do
+                          %i.fa.fa-trash

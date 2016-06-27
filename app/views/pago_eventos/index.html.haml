@@ -1,0 +1,72 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Validación de Pagos:
+      = @evento.present? ? @evento.nombre : nil
+      %i.fa.fa-bars
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li
+        Pagos Realizados:
+        = @estadisticas[0]+@estadisticas[1]
+      %li
+        Pagos Validados:
+        = @estadisticas[0]
+      %li
+        Pagos Por Validar:
+        = @estadisticas[1]
+      %li
+        Monto Total:
+        = @estadisticas[2]
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            .col-md-12
+              = form_for :validar_pago, url: validar_pago_evento_path, method: :post, id: '' do |f|
+                .table-responsive
+                  %table.table.table-striped.table-bordered.table-hover.datatable-table
+                    %thead.blue-bg
+                      %tr
+                        %th Nombres
+                        %th Apellidos
+                        %th Teléfono
+                        %th E-mail
+                        %th País
+                        %th Estado
+                        %th Ministerio
+                        %th Fecha
+                        %th Status
+                        %th Nro. de Pago
+                        %th Monto
+                        %th Acciones
+                    %tbody
+                      - @pagos_evento.each do |pago|
+                        %tr
+                          %td= pago.contacto.nombres
+                          %td= pago.contacto.apellidos
+                          %td= pago.contacto.telefono
+                          %td= pago.contacto.email
+                          %td= pago.contacto.pais.nombre
+                          - if pago.contacto.estado_id.nil?
+                            %td= "No Aplica"
+                          - else
+                            %td= pago.contacto.estado.nombre
+                          %td= pago.contacto.ministerio.nombre
+                          %td= pago.fecha_pago.strftime('%d-%m-%Y')
+                          - if pago.pago_validado
+                            %td= "Validado"
+                          - else
+                            %th= "Por Validar"
+                          %td= pago.nro_pago
+                          %td= pago.monto
+                          %td.text-center
+                            = link_to(controller: "pago_eventos", action: "validar_pago", id: pago.id )  do
+                              Validar
+                              %i.fa.fa-pencil-square-o
+                .row
+                  .col-md-2.col-md-offset-8
+                    = link_to 'Regresar', root_path, class: 'btn btn-info btn-block'

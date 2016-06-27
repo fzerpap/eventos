@@ -1,0 +1,24 @@
+= provide(:title, 'Listar Empresas Forestales')
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Instituciones
+      %span
+        %i.fa.fa-building
+
+.wrapper.wrapper-content.animated.fadeInRight
+  - if @empresas.empty?
+    - if can? :create, Empresa
+      .row
+        .col-md-12.col-md-offset-0
+          %ul.text-muted.leyenda
+            %li.text-justify
+              Puede registrar una Institución haciendo click en
+              %span.amarillo
+                Nueva Institución
+    .ibox-content.text-center
+      %h3.font-bold No hay Instituciones Registradas
+      - if can? :create, Empresa
+        =link_to  'Nueva Institución',new_empresa_path ,  class: 'btn btn-primary pull-center'
+  -else
+    = render 'table_empresas', object: @empresas

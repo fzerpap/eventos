@@ -1,0 +1,83 @@
+.row
+  .col-md-12.col-md-offset-0
+    .ibox.float-e-margins
+      .ibox-title
+        %h3
+          Nuevo/Editar Contenido
+
+      .ibox-content.border-bottom.white-bg
+        = form_for @contenido, html: { class: "form-horizontal", role: "form" } do |f|
+
+          .ibox.float-e-margins
+            .form-horizontal
+              .form-group
+                = f.label :empresa_id, class: 'col-sm-2 control-label' do
+                  Institución
+                  %span.fa.fa-asterisk.red
+                .col-sm-8
+                  = f.hidden_field :empresa_id, value: current_user.empresa.id
+                  = text_field_tag :nombre_empresa, current_user.empresa.denominacion, class: 'form-control', disabled: true
+              .form-group
+                = f.label :titulo, class: 'col-sm-2 control-label' do
+                  Titulo
+                  %span.fa.fa-asterisk.red
+                .col-sm-8
+                  = f.text_field :titulo, class: 'form-control'
+              .form-group
+                = f.label :autor, class: 'col-sm-2 control-label' do
+                  Autor
+                  %span.fa.fa-asterisk.red
+                .col-sm-8
+                  = f.text_field :autor, class: 'form-control'
+              .form-group
+                = f.label :descripcion, class: 'col-sm-2 control-label' do
+                  Descripción
+                .col-sm-8
+                  = f.text_area :descripcion, class: 'form-control'
+              .form-group
+                = f.label :palabras_claves, class: 'col-sm-2 control-label' do
+                  Palabras Claves
+                  %span.fa.fa-asterisk.red
+                .col-sm-8
+                  = f.text_field :palabras_claves, class: 'form-control'
+              .form-group
+                = f.label :tipo_archivo, class: 'col-sm-2 control-label' do
+                  Tipo de Archivo
+                  %span.fa.fa-asterisk.red
+                .col-sm-8
+                  = f.select(:tipo_archivo, Contenido.valid_tipo_archivo.map { |x| [x.humanize.titleize, x]}, {include_blank: 'Seleccione un Tipo de Archivo'}, class: 'form-control')
+              .form-group
+                = f.label :tipo_contenido_id, class: 'col-sm-2 control-label' do
+                  Tipo de Contenido
+                  %span.fa.fa-asterisk.red
+                .col-sm-8
+                  = f.select :tipo_contenido_id, options_for_select(TipoContenido.where(empresa_id: current_user.empresa.id).order(:id).collect { |p| [p.nombre, p.id]}, f.object.tipo_contenido_id), { selected: f.object.tipo_contenido_id, include_blank: 'Seleccione', class: 'form-control', id: 'tipo_contenido_select'}
+              .form-group
+                = f.label :nombre_archivo, class: 'col-sm-2 control-label' do
+                  Url del Archivo:
+                  %span.fa.fa-asterisk.red
+                .col-sm-8
+                  = f.text_field :nombre_archivo, class: 'form-control'
+                -#  - if f.object.nombre_archivo_url
+                -#    = video_tag f.object.nombre_archivo_url.to_s, controls: true
+                -#  -else
+                -#    = f.file_field :nombre_archivo, class: 'form-control'
+          = f.fields_for :contenido_eventos do |ff|
+            .form-group
+              = ff.label :evento_id , class: 'col-sm-2 control-label' do
+                Evento
+                %span.fa.fa-asterisk.red
+              .col-sm-8
+                -if f.object.id
+                  - e = Evento.find(ContenidoEvento.find_by(contenido_id: f.object.id).evento_id).id
+                  = ff.select :evento_id, options_for_select(Evento.all.collect { |p| [p.nombre, p.id]}, e), {include_blank: 'Seleccione', class: 'form-control', id: 'evento_select'}
+                -else
+                  = ff.select :evento_id, options_for_select(Evento.all.collect { |p| [p.nombre, p.id]}), {include_blank: 'Seleccione', class: 'form-control', id: 'evento_select'}
+          %br/
+          .form-group
+            .col-sm-3
+              = link_to contenidos_path, class: 'btn btn-success' do
+                %i.fa.fa-arrow-left
+                Regresar
+            .col-sm-3.col-sm-offset-6
+              = f.submit class: 'btn btn-primary'

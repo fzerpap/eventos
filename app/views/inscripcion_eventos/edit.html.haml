@@ -1,0 +1,20 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Editando Inscripción al Evento:
+      = @evento.present? ? @evento.nombre : nil
+      %i.fa.fa-bars
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li
+        = link_to('Inscripciones',{controller: "inscripcion_eventos", action: "ver_inscripciones"} )
+      %li
+        Edición de Inscripción
+    %h2
+      Participante:
+      = @inscripcion_evento.contacto.nombres + " "+ @inscripcion_evento.contacto.apellidos
+
+.wrapper.wrapper-content.animated.fadeInRight
+  = render 'form'
+

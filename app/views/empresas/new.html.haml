@@ -1,0 +1,15 @@
+= provide(:title, 'Registro Institución')
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Registrar Institución
+      %span
+        %i.fa.fa-building
+.wrapper.wrapper-content.animated.fadeInRight
+  - if current_user.empresa.present?
+    .ibox-content.text-center
+      %h3.font-bold Existe una Institución ingresada
+      .error-desc
+        Asegurese de ingresar sólo una sola institución.
+  -else
+    = render 'form'

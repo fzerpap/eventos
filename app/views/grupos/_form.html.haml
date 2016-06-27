@@ -1,0 +1,37 @@
+.wrapper.wrapper-content.animated.fadeInRight
+  -if @new
+    .row
+      .col-md-12
+        .ibox-content
+          .row
+            .col-md-4
+              = label_tag :nombre,  class: 'col-sm-4 text-right control-label' do
+                Grupo:
+                %span.fa.fa-asterisk.red
+              .col-sm-8
+                = text_field_tag :nombre, nil,  class: 'form-control', required: 'required'
+                = hidden_field_tag :empresa_id, current_user.empresa.id
+            .col-md-2
+              = button_tag class: 'btn btn-primary btn-responsive btn-block', id: 'btn_crear_grupo', data: {disable_with: 'Crear Grupo'} do
+                Crear Grupo
+                %i.fa.fa-floppy-o
+    #div_asociar{style: 'display:none;'}
+      = render 'form_asociar_contactos'
+  -else
+    .row
+      .col-md-12
+        .ibox-content
+          .row
+            .col-md-4
+              = label_tag :nombre,  class: 'col-sm-4 text-right control-label' do
+                Grupo:
+                %span.fa.fa-asterisk.red
+              .col-sm-8
+                = text_field_tag :nombre, @grupo.nombre,  class: 'form-control', required: 'required'
+                = hidden_field_tag :empresa_id, current_user.empresa.id
+                = hidden_field_tag :grupo_id, @grupo.id
+            = render 'form_asociar_contactos'
+          .row
+            %div#div_table_resultados
+              -if @grupo.contacto_grupos != []
+                = render 'table_edit_contactos'

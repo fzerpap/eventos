@@ -1,0 +1,60 @@
+class EmpresasController < ApplicationController
+  before_action :set_empresa, only: [:show, :edit, :update, :destroy]
+
+  respond_to :html
+
+  def index
+    @empresas = Empresa.all
+    respond_with(@empresas)
+  end
+
+  def show
+    respond_with(@empresa)
+  end
+
+  def new
+    @empresa = Empresa.new
+    respond_with(@empresa)
+  end
+
+  def edit
+  end
+
+  def create
+    @empresa = Empresa.new(empresa_params)
+    @empresa.save
+    respond_with(@empresa)
+  end
+
+  def update
+    @empresa.update(empresa_params)
+    respond_with(@empresa)
+  end
+
+  def destroy
+    @empresa.destroy
+    respond_with(@empresa)
+  end
+
+  private
+    def set_empresa
+      @empresa = Empresa.find(params[:id])
+    end
+
+    def empresa_params
+      params.require(:empresa).permit(:denominacion,
+                                      :abreviado,
+                                      :rif,
+                                      :direccion_fiscal,
+                                      :telefono,
+                                      :nombre_rl,
+                                      :email_rl,
+                                      :email_rl_confirmation,
+                                      :telefono_rl,
+                                      :es_iglesia,
+                                      :estado_id
+                                      )
+    end
+
+
+end

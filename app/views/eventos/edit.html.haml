@@ -1,0 +1,11 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-10
+    %h2
+      Eventos
+      %i.fa.fa-folder-open-o
+    %ol.breadcrumb
+      = render_breadcrumbs
+.wrapper.wrapper-content.animated.fadeInRight
+  = render 'form', plan: @plan
+
+

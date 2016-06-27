@@ -1,0 +1,21 @@
+.row
+  .col-md-12
+    .ibox-content
+      .row
+        .col-md-4
+          = label_tag :contacto_nombres, class: 'col-sm-4 text-right control-label' do
+            Contactos:
+            %span.fa.fa-asterisk.red
+          .col-sm-8
+            = autocomplete_field_tag :contacto_nombres, '', autocomplete_contacto_nombres_grupos_path, class:'form-control'
+        .col-md-2
+          = button_tag 'Agregar Grupo', class: 'btn btn-primary btn-responsive btn-block', id: 'btn_agregar'
+      .row
+        %div#div_table_resultados{style:'display:none;'}
+          = render 'table_agregar_contactos'
+      %br/
+      .row
+        #btn_guardar
+          .col-md-10
+          .col-md-2
+            = button_tag  'Agregar Grupos de Contactos', class: 'btn btn-primary btn-responsive btn-block', id: 'btn_agregar_contactos'

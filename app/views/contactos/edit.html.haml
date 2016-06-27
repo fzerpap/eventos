@@ -1,0 +1,11 @@
+-#= provide(:title, "#{current_user.unidad_ordenacion.reserva_forestal.nombre rescue 'Simapro'} - Cuencas")
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-10
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li
+        %strong
+        Edición de la Preinscripción
+.wrapper.wrapper-content.animated.fadeInRight
+  = render 'form'

@@ -1,0 +1,15 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-10
+    %h2
+      Nuevo Evento
+      %i.fa.fa-tasks
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Registro del Evento
+.wrapper.wrapper-content.animated.fadeInRight
+  = render 'form_select_tipo_plan'
+  #form_libre{style: 'display:none;'}
+    = render 'form'

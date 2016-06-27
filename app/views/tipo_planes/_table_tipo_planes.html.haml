@@ -1,0 +1,54 @@
+.row
+  .col-lg-12
+    .ibox.float-e-margins
+      .ibox-content
+        .row
+          .col-sm-3
+            = button_tag class: 'btn btn-primary btn-responsive', id: 'btn_crear_plan'  do
+              Nueva Tipo plan
+              %i.fa.fa-plus
+        %br
+        %br
+        .row
+          .col-md-12
+            .table-responsive
+              %table.table.table-striped.table-bordered.table-hover.datatable-table
+                %thead.blue-bg
+                  %tr
+                    %th Nombre
+                    %th Invitacion
+                    %th Confirmacion
+                    %th Inscripcion
+                    %th Pago
+                    %th Validar pago
+                    %th Baja
+                    %th Precheck in
+                    %th Check in
+                    %th Contenido
+                    %th Estadisticas
+                    %th Acciones
+                %tbody
+                  - @tipo_planes.each do |tipo_plan|
+                    %tr
+                      %td= tipo_plan.nombre
+                      %td= tipo_plan.invitacion? ? 'Si' : 'No'
+                      %td= tipo_plan.confirmacion? ? 'Si' : 'No'
+                      %td= tipo_plan.inscripcion? ? 'Si' : 'No'
+                      %td= tipo_plan.pago? ? 'Si' : 'No'
+                      %td= tipo_plan.validar_pago? ? 'Si' : 'No'
+                      %td= tipo_plan.baja? ? 'Si' : 'No'
+                      %td= tipo_plan.precheck_in? ? 'Si' : 'No'
+                      %td= tipo_plan.check_in? ? 'Si' : 'No'
+                      %td= tipo_plan.contenido? ? 'Si' : 'No'
+                      %td= tipo_plan.estadisticas? ? 'Si' : 'No'
+                      %td
+                        = link_to tipo_plan,  rel: 'tooltip',  title: 'Ver' do
+                          %i.fa.fa-search
+                          &nbsp;
+                          &nbsp;
+                        = link_to edit_tipo_plan_path(tipo_plan), 'data-toggle'=> 'tooltip', 'data-placement' => 'left',  'title' => 'Editar' do
+                          %i.fa.fa-edit
+                          &nbsp;
+                          &nbsp;
+                        = link_to tipo_plan, data: { confirm: '¿Está seguro de realizar esta acción?' }, method: :delete, 'data-toggle'=> 'tooltip', 'data-placement' => 'left',  'title' => 'Eliminar' do
+                          %i.fa.fa-trash

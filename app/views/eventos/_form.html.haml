@@ -1,0 +1,79 @@
+= form_for(@evento,  html:{ class: 'form-horizontal', id: 'form_evento'}) do |f|
+  .row
+    .col-md-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            = render 'shared/error_messages', object: f.object, model: 'Evento'
+            .row.col-sm-12.col-sm-offset-1
+              = f.hidden_field :tipo_plan_id, value: @plan.nil? ? '' : @plan
+              = f.hidden_field :empresa_id,  value: current_user.empresa.id
+              .form-group
+                = f.label :nombre , class: 'col-sm-2 control-label' do
+                  Nombre:
+                  %span.fa.fa-asterisk.red
+                .col-sm-6
+                  = f.text_field :nombre,class: 'form-control'
+              .form-group
+                = f.label :descripcion , class: 'col-sm-2 control-label' do
+                  Descripción:
+                  %span.fa.fa-asterisk.red
+                .col-sm-6
+                  = f.text_area :descripcion,class: 'form-control'
+              .form-group
+                = f.label :fecha_inicio, class: 'col-sm-2 control-label' do
+                  Fecha de Inicio:
+                  %span.fa.fa-asterisk.red
+                .col-sm-6
+                  = f.date_select :fecha_inicio, start_year: Date.today.year, class: 'form-control'
+              .form-group
+                = f.label :fecha_fin, class: 'col-sm-2 control-label' do
+                  Fecha de Finalización:
+                  %span.fa.fa-asterisk.red
+                .col-sm-6
+                  = f.date_select :fecha_fin, start_year: Date.today.year, include_blank: true,  class: 'form-control'
+              .form-group
+                = f.label :num_invitados , class: 'col-sm-2 control-label' do
+                  Número de Invitados:
+                  %span.fa.fa-asterisk.red
+                .col-sm-6
+                  = f.number_field :num_invitados,class: 'form-control'
+              #form_intermedio{style:'display:none;'}
+                = render 'form_intermedio', f: f
+              - if @plan == 2
+                = render 'form_intermedio', f: f
+              #form_full{style:'display:none;'}
+                = render 'form_full', f: f
+              - if @plan == 3
+                = render 'form_full', f: f
+              .form-group
+                = f.label :lugar , class: 'col-sm-2 control-label' do
+                  Lugar:
+                  %span.fa.fa-asterisk.red
+                .col-sm-6
+                  = f.text_field :lugar,class: 'form-control'
+              .form-group
+                = f.label :horario , class: 'col-sm-2 control-label' do
+                  Horario:
+                  %span.fa.fa-asterisk.red
+                .col-sm-6
+                  = f.text_field :horario,class: 'form-control'
+              .form-group
+                = f.label :servicios , class: 'col-sm-2 control-label' do
+                  Servicios:
+                .col-sm-6
+                  = f.text_area :servicios,class: 'form-control'
+  .row
+    .col-sm-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            .col-sm-2
+              = link_to eventos_path, class: 'btn btn-success' do
+                %i.fa.fa-arrow-left
+                Regresar
+            .col-sm-3.col-sm-offset-7
+              = f.button class: 'btn btn-primary btn-responsive btn-block', data: {disable_with: 'Guardar'} do
+                Guardar y Continuar
+                %i.fa.fa-floppy-o
+

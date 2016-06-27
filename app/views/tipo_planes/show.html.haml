@@ -1,0 +1,83 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-10
+    %h2
+      %i.fa.fa-fa-folder-open-o
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Registro del Plan
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            .col-sm-5
+              %table.table.table-striped.table-bordered.table-condensed
+                %tbody
+                  %tr
+                    %td.text-center
+                      %strong Nombre:
+                    %td
+                      = @tipo_plan.nombre
+                  %tr
+                    %td.text-center
+                      %strong Invitacion:
+                    %td
+                      = @tipo_plan.invitacion? ? 'Si' : 'No'
+                  %tr
+                    %td.text-center
+                      %strong Confirmacion:
+                    %td
+                      = @tipo_plan.confirmacion? ? 'Si' : 'No'
+                  %tr
+                    %td.text-center
+                      %strong Inscripcion:
+                    %td
+                      = @tipo_plan.inscripcion? ? 'Si' : 'No'
+                  %tr
+                    %td.text-center
+                      %strong Pago:
+                    %td
+                      = @tipo_plan.pago? ? 'Si' : 'No'
+                  %tr
+                    %td.text-center
+                      %strong Validar pago:
+                    %td
+                      = @tipo_plan.validar_pago? ? 'Si' : 'No'
+                  %tr
+                    %td.text-center
+                      %strong Baja:
+                    %td
+                      = @tipo_plan.baja? ? 'Si' : 'No'
+                  %tr
+                    %td.text-center
+                      %strong Precheck in:
+                    %td
+                      = @tipo_plan.precheck_in? ? 'Si' : 'No'
+                  %tr
+                    %td.text-center
+                      %strong Check in:
+                    %td
+                      = @tipo_plan.check_in? ? 'Si' : 'No'
+                  %tr
+                    %td.text-center
+                      %strong Contenido:
+                    %td
+                      = @tipo_plan.contenido? ? 'Si' : 'No'
+                  %tr
+                    %td.text-center
+                      %strong Estadisticas:
+                    %td
+                      = @tipo_plan.estadisticas? ? 'Si' : 'No'
+          .row
+            .col-sm-3
+              = link_to tipo_planes_path, class: 'btn btn-success' do
+                %i.fa.fa-arrow-left
+                Regresar
+            .col-sm-3
+              = link_to edit_tipo_plan_path(@tipo_plan), class: 'btn btn-primary' do
+                Editar
+                %i.fa.fa-edit

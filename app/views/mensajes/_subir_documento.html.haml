@@ -1,0 +1,10 @@
+.fileinput.fileinput-new.input-group{"data-provides" => "fileinput"}
+  .form-control{"data-trigger" => "fileinput"}
+    %i.fa.fa-upload.fileinput-exists
+    %span.fileinput-filename
+      - unless @mensaje.errors.any?
+        = (action_name == 'new') ? '' : (f.object.archivo_adjunto.blank? ? '' : f.object.archivo_adjunto.file.filename)
+  %span.input-group-addon.btn.btn-default.btn-file
+    %span.fileinput-new Seleccionar Documento Digital
+    %span.fileinput-exists Cambiar Documento Digital
+    = f.file_field :archivo_adjunto

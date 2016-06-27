@@ -1,0 +1,53 @@
+= form_for [@evento_id, @zona],  html: { class: 'form-horizontal', role: 'form', id: 'form_zona'} do |f|
+  .row
+    .col-md-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            = render 'shared/error_messages', object: f.object, model: 'zona'
+            .row.col-sm-12.col-sm-offset-1
+              = f.hidden_field :evento_id, value: @evento_id.nil? ? '' : @evento_id.id
+              .form-group
+                = f.label :nombre, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Nombre:
+                .col-sm-6
+                  = f.text_field :nombre, class: 'form-control'
+              .form-group
+                = f.label :cupos, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Cupos:
+                .col-sm-6
+                  = f.number_field :cupos, class: 'form-control'
+              .form-group
+                = f.label :precio, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Precio:
+                .col-sm-6
+                  = f.text_field :precio, class: 'form-control'
+              .form-group
+                = f.label :num_asiento_inicial, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Nro. asiento inicial:
+                .col-sm-6
+                  = f.text_field :num_asiento_inicial, class: 'form-control'
+              .form-group
+                = f.label :num_asiento_final, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Nro. asiento final:
+                .col-sm-6
+                  = f.text_field :num_asiento_final, class: 'form-control'
+  .row
+    .col-sm-12
+      .ibox.float-e-margins
+        .ibox-content
+          .row
+            .col-sm-3
+              .col-sm-2
+              = link_to evento_zonas_path(@evento_id), class: 'btn btn-success' do
+                %i.fa.fa-arrow-left
+                Regresar
+            .col-sm-3.col-sm-offset-3
+              = f.button class: 'btn btn-primary btn-responsive btn-block', data: {disable_with: 'Guardar '} do
+                Guardar y Continuar
+                %i.fa.fa-floppy-o

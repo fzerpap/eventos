@@ -10,11 +10,12 @@ Eventos::Application.routes.draw do
   post 'buscar/contenido_eventos',    to: 'contenidos#buscar_contenido_eventos'
 
 
+  # resources :pago_eventos
   get 'pago_eventos/index'
-
   get 'pago_eventos/registro_pago'
-
   get 'pago_eventos/validar_pago'
+  get  'consultar_evento',   to: 'pago_eventos#index_consulta_eventos',  as: :consultar_pago_evento
+
 
   resources :contactos
 
@@ -115,7 +116,8 @@ Eventos::Application.routes.draw do
   # Dynamic Selects y Controladores Dinamicos
   namespace :dynamic_select do
     post 'dynamic_pais', to: 'dynamic_pais#codigo_pais'
-    post 'dynamic_estado', to: 'dynamic_pais#estado'  end
+    post 'dynamic_estado', to: 'dynamic_pais#estado'
+  end
 
 
 end

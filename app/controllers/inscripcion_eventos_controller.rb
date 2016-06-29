@@ -14,6 +14,7 @@ class InscripcionEventosController < ApplicationController
 
   def index_consulta_eventos
    @eventos = Evento.all
+   @accion = params[:accion]
   end
 
 
@@ -37,7 +38,7 @@ class InscripcionEventosController < ApplicationController
   end
 
   def ver_inscripciones
-    @evento = Evento.find_by(nombre: "Escuela de Influencia y Transformación")
+    @evento = Evento.find(params[:evento_id])
     @estadisticas = InscripcionEvento.get_estadisticas(@evento)
     @inscripcion_eventos = @evento.inscripcion_eventos.order(:fecha)
     respond_with(@inscripcion_eventos)

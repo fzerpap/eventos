@@ -2,16 +2,16 @@
   .col-lg-10
     %h2
       %i.fa.fa-home
-      Inscripción de Eventos
+      Validar Pagos
     %ol.breadcrumb
       %li
         = link_to 'Inicio', root_url
       %li.active
         %strong
-          Inscripción de Eventos
+          Validar Pagos
 .wrapper.wrapper-content.animated.fadeInRight
   .row.form-horizontal
-    = form_tag({:controller => 'inscripcion_eventos', :action => @accion}, :method => 'get') do
+    = form_tag({:controller => 'pago_eventos', :action => 'index'}, :method => 'get') do
       .col-md-10
         .form-group
           = label_tag :evento_id, class: 'col-sm-4 control-label' do

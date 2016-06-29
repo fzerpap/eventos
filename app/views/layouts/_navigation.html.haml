@@ -136,8 +136,8 @@
             %span.nav-label Inscripciones del Evento
             %span.fa.arrow
           %ul{:class => "nav nav-second-level #{is_active_controller('inscripcion_eventos')}"}
-            %li{class: is_active_action('index_consulta_eventos')}= link_to 'Aprobar Preinscripciones',inscripcion_path
-            %li{class: is_active_action('ver_inscripciones')}= link_to 'Gestionar Inscripciones', ver_inscritos_path
+            %li{class: is_active_action('index_consulta_eventos')}= link_to 'Aprobar Preinscripciones', inscripcion_path(accion: 'index')
+            %li{class: is_active_action('index_consulta_eventos')}= link_to 'Gestionar Inscripciones', inscripcion_path(accion: 'ver_inscripciones')
             %li{class: is_active_action('estadisticas_inscripciones')}= link_to 'Estadísticas', estadisticas_inscritos_path
             -#%li{class: is_active_action('index')}= link_to 'Aprobar Preinscripciones',inscripcion_eventos_path
             -#%li{class: is_active_action('ver_inscripciones')}= link_to 'Gestionar Inscripciones', ver_inscritos_path
@@ -148,7 +148,8 @@
             %span.nav-label Validación de Pagos
             %span.fa.arrow
           %ul{:class => "nav nav-second-level #{is_active_controller('pago_eventos')}"}
-            %li{class: is_active_action('index')}= link_to 'Validar Pagos', pago_eventos_index_path
+            %li{class: is_active_action('index_consulta_eventos')}= link_to 'Validar Pagos', consultar_pago_evento_path
+            -#%li{class: is_active_action('index')}= link_to 'Validar Pagos', pago_eventos_index_path
       - if can? :manage, Contenido
         %li{class: is_active_controller('contenido')}
           %a{:href => ""}

@@ -3,11 +3,14 @@ class PagoEventosController < ApplicationController
   def index
     #@eventos = Evento.where(empresa_id: current_user.empresa_id).order(:fecha_inicio)
 
-    @evento = Evento.find_by(nombre: "Escuela de Influencia y Transformación")
-
+    @evento = Evento.find(params[:evento_id])
     @estadisticas = InscripcionEvento.get_estadisticas_pagos(@evento)
     @pagos_evento = @evento.inscripcion_eventos.where('aceptado =? and monto >?','true','0')
     #respond_with(@inscripcion_eventos)
+  end
+
+  def index_consulta_eventos
+    @eventos = Evento.all
   end
 
   def registro_pago
@@ -55,13 +58,14 @@ class PagoEventosController < ApplicationController
 
   end
 
-
   def validar_pago
     @inscripcion_evento = InscripcionEvento.find(params[:id])
     puts @inscripcion_evento.id
     @fuente = 'validar_pago'
     render "form"
   end
+
+
 
   private
     def self.permission

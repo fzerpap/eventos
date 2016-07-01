@@ -9,7 +9,7 @@ class InscripcionEvento < ActiveRecord::Base
   validates :nro_pago, uniqueness: {message: 'El campo número de pago ya está registrado'}, :on => :update
 
 
-  mount_uploader :documento, ImgDocUploader
+  #mount_uploader :documento, ImgDocUploader
 
   def self.get_estadisticas(evento)
     estadisticas = Array.new

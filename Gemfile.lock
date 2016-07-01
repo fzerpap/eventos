@@ -216,7 +216,6 @@ GEM
     rgeo-activerecord (1.2.0)
       activerecord (~> 4.0)
       rgeo (~> 0.3)
-    rmagick (2.13.4)
     roo (2.3.2)
       nokogiri (~> 1)
       rubyzip (~> 1.1, < 2.0.0)
@@ -325,7 +324,6 @@ DEPENDENCIES
   remotipart (~> 1.2)
   rename
   rgeo
-  rmagick (~> 2.13.4)
   roo
   sass-rails (~> 4.0.0)
   sdoc

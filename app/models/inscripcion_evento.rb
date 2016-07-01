@@ -1,8 +1,9 @@
 class InscripcionEvento < ActiveRecord::Base
+  mount_uploader :documento, ImgDocUploader
   belongs_to :contacto
   belongs_to :evento
 
-  mount_uploader :documento, ImgDocUploader
+
   validates :documento , presence: {message: 'El campo documento es obligatorio'}, on: :update
   validates :nro_pago, presence: {message: 'El campo documento es obligatorio'}, :on => :update
   validates :nro_pago, uniqueness: {message: 'El campo número de pago ya está registrado'}, :on => :update

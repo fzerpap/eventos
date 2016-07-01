@@ -1,5 +1,5 @@
 class InscripcionEvento < ActiveRecord::Base
-  mount_uploader :documento, ImgDocUploader
+
   belongs_to :contacto
   belongs_to :evento
 
@@ -7,6 +7,9 @@ class InscripcionEvento < ActiveRecord::Base
   validates :documento , presence: {message: 'El campo documento es obligatorio'}, on: :update
   validates :nro_pago, presence: {message: 'El campo documento es obligatorio'}, :on => :update
   validates :nro_pago, uniqueness: {message: 'El campo número de pago ya está registrado'}, :on => :update
+
+
+  mount_uploader :documento, ImgDocUploader
 
   def self.get_estadisticas(evento)
     estadisticas = Array.new

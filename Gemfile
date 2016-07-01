@@ -82,7 +82,7 @@ gem 'carrierwave'
 gem 'jquery-fileupload-rails'
 gem 'remotipart', '~> 1.2'
 
-#gem 'rmagick', '~> 2.13.4'
+gem 'rmagick', '~> 2.13.4'
 #gem 'mini_magick', '~> 4.2.3'
 
 

@@ -138,6 +138,16 @@ admin_cliente = Role.create!(name: 'Administrador en la Empresa',
                                                                                            :Contacto,
                                                                                            :Static,
                                                                                            :jquery_file_uploads,
+                                                                                           :TipoPlan,
+                                                                                           :Grupo,
+                                                                                           :Invitado,
+                                                                                           :InscripcionEvento,
+                                                                                           :pago_eventos,
+                                                                                           :EquipoGestor,
+                                                                                           :Contenido,
+                                                                                           :Zona,
+                                                                                           :Mensaje
+
                                                                          ]),
                              role_type: Role.role_types[:administrador_cliente])
 

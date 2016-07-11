@@ -41,8 +41,7 @@ class InvitadosController < ApplicationController
     p filtro.inspect
     invitados = Invitado.consulta(filtro)
     p invitados
-
-    # render json: [invitados: invitados]
+    render json: [invitados: invitados]
   end
 
   private

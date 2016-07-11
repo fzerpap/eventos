@@ -29,7 +29,8 @@ jQuery(document).ready ($) ->
         success: (data) ->
           console.log('paso')
           if data
-            url = '/invitados'
+
+            url = '/invitados/'+
             $(location).attr 'href', url
           else
             alert('No existen registros de invitados con ningun criterio seleccionado')

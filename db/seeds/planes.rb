@@ -1,0 +1,4 @@
+TipoPlan.create!(nombre: 'Libre', invitacion: TRUE, confirmacion: TRUE,inscripcion: FALSE ,pago:FALSE , validar_pago: FALSE,baja:FALSE ,precheck_in:FALSE ,check_in:FALSE ,contenido: FALSE,estadisticas:TRUE )
+TipoPlan.create!(nombre: 'Intermedio', invitacion: TRUE, confirmacion: TRUE,inscripcion: TRUE ,pago:FALSE , validar_pago: FALSE,baja:TRUE ,precheck_in:TRUE ,check_in:TRUE ,contenido: FALSE,estadisticas:TRUE )
+TipoPlan.create!(nombre: 'Full', invitacion: TRUE, confirmacion: TRUE,inscripcion: TRUE ,pago:TRUE , validar_pago: TRUE,baja:TRUE ,precheck_in:TRUE ,check_in:TRUE ,contenido: TRUE,estadisticas:TRUE )
+puts '#---- TIPOS DE PLANES  SEEDED ----#'

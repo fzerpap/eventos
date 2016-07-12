@@ -108,16 +108,16 @@
             %li{class: is_active_action('index')}= link_to 'Gestionar Eventos', eventos_path
             - if can? :create, Evento
               %li{class: is_active_action('new')}= link_to 'Nuevo Evento', new_evento_path
-      -#- if can? :manage, Invitado
-      -#  %li{class: is_active_controller('invitados')}
-      -#    %a{:href => ""}
-      -#      %i.fa.fa-tasks
-      -#      %span.nav-label Invitados
-      -#      %span.fa.arrow
-      -#    %ul{:class => "nav nav-second-level #{is_active_controller('invitados')}"}
-      -#      -#%li{class: is_active_action('index')}= link_to 'Gestionar Invitados', invitados_path
-      -#      - if can? :create, Invitado
-      -#        %li{class: is_active_action('new')}= link_to 'Crear Lista de  Invitados', new_invitado_path
+      - if can? :manage, Invitado
+        %li{class: is_active_controller('invitados')}
+          %a{:href => ""}
+            %i.fa.fa-tasks
+            %span.nav-label Invitados
+            %span.fa.arrow
+          %ul{:class => "nav nav-second-level #{is_active_controller('invitados')}"}
+            -#%li{class: is_active_action('index')}= link_to 'Gestionar Invitados', invitados_path
+            - if can? :create, Invitado
+              %li{class: is_active_action('new')}= link_to 'Crear Lista de  Invitados', new_invitado_path
       - if can? :manage, TipoPlan
         %li{class: is_active_controller('tipo_planes')}
           %a{:href => ""}

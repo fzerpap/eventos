@@ -107,6 +107,8 @@ Estado.create!(nombre: 'Trujillo',codificacion: "TL",pais: Pais.where(nombre: 'V
 Estado.create!(nombre: 'Vargas',codificacion: "VA",pais: Pais.where(nombre: 'Venezuela').first )
 Estado.create!(nombre: 'Yaracuy',codificacion: "YY",pais: Pais.where(nombre: 'Venezuela').first )
 Estado.create!(nombre: 'Zulia',codificacion: "ZL",pais: Pais.where(nombre: 'Venezuela').first )
+Estado.create!(nombre: 'Buenos Aires',codificacion: "BA",pais: Pais.where(nombre: 'Argentina').first )
+Estado.create!(nombre: 'Ciudad de Panama',codificacion: "BA",pais: Pais.where(nombre: 'Panamá').first )
 
 puts '#---- Estados  SEEDED  FINALIZADA----#'
 

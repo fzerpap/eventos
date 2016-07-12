@@ -2,6 +2,7 @@ Eventos::Application.routes.draw do
 
   resources :invitados
   post 'crear_listas_invitados', to: 'invitados#crear_listas_invitados'
+  post 'listar_invitados', to: 'invitados#listar_invitados', as: :listar_invitados
 
   resources :tipo_planes
 

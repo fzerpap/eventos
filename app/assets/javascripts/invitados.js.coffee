@@ -17,7 +17,7 @@ jQuery(document).ready ($) ->
           grupos.push($(this).val())
       $.ajax
         type: 'POST'
-        url: '/crear_listas_invitados'
+        url: '/listar_invitados'
         dataType: 'JSON'
         data:
           sexos: sexos
@@ -28,10 +28,8 @@ jQuery(document).ready ($) ->
           evento_id: $('#evento_select').val()
         success: (data) ->
           console.log('paso')
-          if data
+          if data != 0
 
-            url = '/invitados/'+
-            $(location).attr 'href', url
           else
             alert('No existen registros de invitados con ningun criterio seleccionado')
         error: (XMLHttpRequest, textStatus, errorThrown) ->

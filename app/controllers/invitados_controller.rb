@@ -37,10 +37,12 @@ class InvitadosController < ApplicationController
   end
 
   def crear_listas_invitados
+  end
+
+  def listar_invitados
     filtro = Invitado.formatear_filtros(params[:evento_id], params[:grupos], params[:sexos], params[:estados_civiles], params[:desde], params[:hasta] )
-    p filtro.inspect
-    invitados = Invitado.consulta(filtro)
-    p invitados
+    invitados = Invitado.crear_lista(filtro)
+
     render json: [invitados: invitados]
   end
 

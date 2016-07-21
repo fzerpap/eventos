@@ -1,0 +1,24 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2
+      Invitados
+      %i.fa.fa-cogs
+    %ol.breadcrumb
+      %li
+        = link_to 'Inicio', root_url
+      %li.active
+        %strong
+          Lista de Invitados Registrados al Evento
+          = @evento.nombre
+.wrapper.wrapper-content.animated.fadeInRight
+  - if @invitados.empty?
+    .row
+      .col-md-12
+    .ibox-content.text-center
+      %h3.font-bold No hay Invitados Registrados
+      %br/
+  -else
+    = render 'table_invitados', object: @invitados
+
+%div#form_invitado_index{style:'display:none;'}
+  = render 'form_asociar_contactos'

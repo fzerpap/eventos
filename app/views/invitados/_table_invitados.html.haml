@@ -4,32 +4,37 @@
       .ibox-content
         .row
           .col-sm-3
-            = link_to new_invitado_path, class: 'btn btn-primary btn-responsive' do
-              Nueva Invitado
+            = button_tag class: 'btn btn-primary btn-responsive', id: 'btn_agregar_invitado' do
+              Agregar Invitado
               %i.fa.fa-plus
-        %br
-        %br
+          .col-sm-3.col-md-offset-6
+            = link_to delete_invitados_path( evento_id: @evento.id), data: { confirm: '¿Está seguro de realizar esta eliminar toda la lista?' }, class: 'btn btn-primary btn-responsive'  do
+              Eliminar Lista de Invitados
+              %i.fa.fa-trash
+        %br/
+        %br/
         .row
           .col-md-12
             .table-responsive
               %table.table.table-striped.table-bordered.table-hover.datatable-table
                 %thead.blue-bg
                   %tr
+                    %th Nombres
+                    %th Apellidos
+                    %th Doc. Identidad
+                    %th Email
+                    %th Telefono
                     %th Fecha invitacion
-                    %th Fecha confirmacion
-                    %th Tipo confirmacion
-                    %th Contactos
-                    %th Eventos
-                    %th
                     %th
                 %tbody
                   - @invitados.each do |invitado|
                     %tr
-                      %td= invitado.fecha_invitacion
-                      %td= invitado.fecha_confirmacion
-                      %td= invitado.tipo_confirmacion
-                      %td= invitado.contactos
-                      %td= invitado.eventos
+                      %td= invitado.contacto.nombres
+                      %td= invitado.contacto.apellidos
+                      %td= invitado.contacto.doc_identidad
+                      %td= invitado.contacto.email
+                      %td= invitado.contacto.telefono
+                      %td= invitado.fecha_invitacion.strftime("%d-%m-%Y")
                       %td
                         = link_to invitado,  rel: 'tooltip',  title: 'Ver' do
                           %i.fa.fa-search

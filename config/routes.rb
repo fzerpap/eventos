@@ -1,8 +1,16 @@
 Eventos::Application.routes.draw do
 
-  resources :invitados
+  resources :invitados do
+    get :autocomplete_contactos_invitados, :on => :collection
+  end
   post 'crear_listas_invitados', to: 'invitados#crear_listas_invitados'
-  post 'listar_invitados', to: 'invitados#listar_invitados', as: :listar_invitados
+  get 'listar_invitados', to: 'invitados#listar_invitados', as: :listar_invitados
+  post 'agregar_invitado',  to: 'invitados#agregar_invitados',  as: :agregar_invitados,  defaults: { format: :json }
+  post 'asociar_invitado',  to: 'invitados#asociar_invitado_contactos',  as: :asociar_invitados
+  post 'buscar_invitados',  to: 'invitados#buscar_invitados',  as: :buscar_invitados,  defaults: { format: :json }
+  get 'listado_xevento/:evento',  to: 'invitados#lista_xevento',  as: :listado_xevento
+  get :delete_many, to: 'invitados#delete_many', as: :delete_invitados
+
 
   resources :tipo_planes
 

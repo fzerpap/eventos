@@ -7,23 +7,35 @@
             = render 'shared/error_messages', object: f.object, model: 'Invitado'
             .row.col-sm-12.col-sm-offset-1
               .form-group
+                = f.label :contacto, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Contacto:
+                .col-sm-6
+                  = f.text_field :contacto, value: @invitado.contacto.nombres + ' ' + @invitado.contacto.apellidos, class: 'form-control', readonly: 'readonly'
+              .form-group
+                = f.label :evento, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Evento:
+                .col-sm-6
+                  = f.text_field :evento, value: @invitado.evento.nombre, class: 'form-control', readonly: 'readonly'
+              .form-group
                 = f.label :fecha_invitacion, class: 'col-sm-2 control-label' do
                   %span.fa.fa-asterisk.red
-                  fecha_invitacion:
+                  Fecha invitaci&oacute;n:
                 .col-sm-6
                   = f.date_select :fecha_invitacion,  class: 'form-control'
               .form-group
                 = f.label :fecha_confirmacion, class: 'col-sm-2 control-label' do
                   %span.fa.fa-asterisk.red
-                  fecha_confirmacion:
+                  Fecha confirmaci&oacute;n:
                 .col-sm-6
                   = f.date_select :fecha_confirmacion,  class: 'form-control'
-            .form-group
-              = f.label :tipo_confirmacion, class: 'col-sm-2 control-label' do
-                %span.fa.fa-asterisk.red
-                tipo_confirmacion:
-              .col-sm-6
-                = f.number_field :tipo_confirmacion,  class: 'form-control' 
+              .form-group
+                = f.label :tipo_confirmacion, class: 'col-sm-2 control-label' do
+                  %span.fa.fa-asterisk.red
+                  Tipo confirmaci&oacute;n:
+                .col-sm-6
+                  = f.select(:tipo_confirmacion, Invitado.valid_tipo_confirmacion.map { |x| [x.humanize.titleize, x]}, {include_blank: 'Seleccione un Tipo de Confirmacion'}, class: 'form-control')
 
   .row
     .col-sm-12

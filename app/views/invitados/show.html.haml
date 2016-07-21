@@ -1,50 +1,48 @@
 .row.wrapper.border-bottom.white-bg.page-heading
   .col-sm-10
     %h2
-      %i.fa.fa-bars
+      Invitados
+      %i.fa.fa-cogs
     %ol.breadcrumb
       %li
         = link_to 'Inicio', root_url
-      %li
       %li.active
         %strong
+          Invitados Registrados
 .wrapper.wrapper-content.animated.fadeInRight
   .row
     .col-lg-12.col-md-12.col-sm-12.col-xs-12
-      .ibox.float-e-margins
-        .ibox-title
-          %h3
-            invitado
+      .ibox
         .ibox-content
           .row
             .col-sm-5
               %table.table.table-striped.table-bordered.table-condensed
                 %tbody
                   %tr
+                  %td.text-right
+                    %strong Contacto:
+                  %td
+                    = @invitado.contacto.nombres + ' ' + @invitado.contacto.apellidos
+                  %tr
+                    %td.text-right
+                      %strong Evento:
+                    %td
+                      = @invitado.evento.nombre
+                  %tr
                     %td.text-right
                       %strong Fecha invitacion:
                     %td
-                      = @invitado.fecha_invitacion
+                      = @invitado.fecha_invitacion.strftime("%d-%m-%Y")
                   %tr
                     %td.text-right
                       %strong Fecha confirmacion:
                     %td
-                      = @invitado.fecha_confirmacion
+                      = @invitado.fecha_confirmacion.present? ? @invitado.fecha_confirmacion.strftime("%d-%m-%Y") : @invitado.fecha_confirmacion
                   %tr
                     %td.text-right
                       %strong Tipo confirmacion:
                     %td
-                      = @invitado.tipo_confirmacion
-                  %tr
-                    %td.text-right
-                      %strong Contactos:
-                    %td
-                      = @invitado.contactos
-                  %tr
-                    %td.text-right
-                      %strong Eventos:
-                    %td
-                      = @invitado.eventos
+                      = @invitado.tipo_confirmacion.to_s
           .row
             .col-sm-3
               = link_to invitados_path, class: 'btn btn-success' do

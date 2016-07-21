@@ -1,0 +1,13 @@
+%div#consultar_xevento
+  .row
+    .form-horizontal
+      .col-md-4
+        .form-group
+          = label_tag :evento_id, class: 'col-sm-4 control-label' do
+            Eventos:
+          .col-sm-8
+            = select_tag :evento_id, options_from_collection_for_select(current_user.empresa.eventos, :id, :nombre), {include_blank: 'Seleccione Evento', class: 'form-control' }
+      .col-md-4
+        .col-sm-6
+          = button_tag  'Buscar Lista de Invitados', class: 'btn btn-primary btn-responsive btn-block', id: 'btn_buscar_invitados'
+
